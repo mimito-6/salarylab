@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commute Cost Calculator — How Much Your Commute Really Costs | SalaryLab</title>
+<meta name="description" content="Calculate the true yearly cost of your commute: the hours lost plus the money spent on transit, fuel, tolls, and parking — in one clear number.">
+<link rel="canonical" href="https://salary.mimito6.uk/commute-cost">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Commute Cost Calculator",
+  "url": "https://salary.mimito6.uk/commute-cost",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Estimate the total yearly cost of commuting: hours lost plus money spent on transit, fuel, tolls, and parking."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does commuting really cost per year?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It costs money plus time. Add your yearly transit or fuel expenses to the value of your commute hours. For example, a 1-hour daily round trip, 5 days a week, is 260 hours a year; valued at a $48.08/hour wage that is $12,500 in time alone." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I count commute time as lost income?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That is up to you. Valuing commute hours at your hourly wage shows the opportunity cost — what that time would be worth at your rate of pay. It is an estimate of lost value, not money you would have earned." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a longer commute ever worth it for higher pay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Compare the salary difference against your commute cost. If the raise is smaller than what the commute costs you in time and money each year, the higher-paying job pays you less in real terms." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I estimate my fuel and toll costs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Start with your monthly spend: fuel, tolls, parking, and transit passes. Multiply by 12, then add any yearly costs like vehicle maintenance tied to commuting. Enter the monthly figure and extra yearly costs in the calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the calculator include car payments or insurance?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Fixed costs like car payments and insurance are due whether or not you commute, so they are excluded. Only include costs that scale with commuting, plus the optional time value of your commute hours." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does remote work compare?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Working from home removes both the money cost and the time cost of commuting. Enter your current commute details to see the total yearly value a remote or hybrid schedule would give you back." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost" aria-current="page">Commute Cost</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Commute Cost Calculator</h1>
+    <p class="lede">An hour a day on the train is 260 hours a year — over ten full days of your life, every year. Add the tickets, the fuel, the tolls, the parking. This is what your commute actually costs.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your commute</h2>
+    <p class="hint">Time is computed as round-trip hours × commute days × 52 weeks.</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="cCommuteHours">Daily commute, round trip (hours)</label>
+        <input id="cCommuteHours" type="number" inputmode="decimal" min="0" step="any" value="1">
+        <small>Both directions combined. 45 minutes each way = 1.5 hours.</small>
+      </div>
+      <div class="field">
+        <label for="cDays">Commute days per week</label>
+        <input id="cDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
+      </div>
+    </div>
+    <h2 style="margin-top:22px;">Your money cost</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="cMonthlyCost">Monthly transport cost</label>
+        <input id="cMonthlyCost" type="number" inputmode="decimal" min="0" step="any" value="200">
+        <small>Transit pass, fuel, tolls, parking — one monthly total.</small>
+      </div>
+      <div class="field">
+        <label for="cAnnualCost">Extra yearly cost</label>
+        <input id="cAnnualCost" type="number" inputmode="decimal" min="0" step="any" value="0">
+        <small>Yearly-only costs, e.g. annual parking permit or maintenance tied to commuting.</small>
+      </div>
+    </div>
+    <h2 style="margin-top:22px;">Value your time <span style="font-weight:400;color:var(--muted);font-size:0.85rem;">(optional)</span></h2>
+    <p class="hint">Enter your salary to value commute hours at your hourly wage. Leave blank to skip.</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="cSalary">Annual salary (gross, optional)</label>
+        <input id="cSalary" type="number" inputmode="decimal" min="0" step="any" value="">
+      </div>
+      <div class="field">
+        <label for="cHoursPerWeek">Scheduled hours per week</label>
+        <input id="cHoursPerWeek" type="number" inputmode="decimal" min="0" step="any" value="40">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcCommuteBtn" type="button">Calculate my commute cost</button>
+    </div>
+    <p id="commuteError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="commuteResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your commute costs you every year</div>
+        <div class="value" id="ccTotal">—</div>
+        <div class="delta" id="ccDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Hours spent commuting / year</span><span class="v" id="ccHours">—</span></li>
+        <li><span class="k">That's equivalent to</span><span class="v" id="ccDays">—</span></li>
+        <li><span class="k">Or full work weeks</span><span class="v" id="ccWeeks">—</span></li>
+        <li><span class="k">Money spent on transport / year</span><span class="v" id="ccMoney">—</span></li>
+        <li id="rowTimeCost"><span class="k">Time value (at your hourly wage)</span><span class="v" id="ccTime">—</span></li>
+      </ul>
+      <div class="warn-note">Thinking of taking a "better-paid" job further away? <a href="/">Check whether the raise beats the commute on your true hourly pay →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">commute_hours = daily_hours × days_per_week × 52</div>
+    <div class="formula">money_cost = monthly_transport × 12 + extra_yearly_cost</div>
+    <div class="formula">time_cost = commute_hours × your_hourly_wage (optional)</div>
+    <p>Fixed costs such as car payments and insurance are not included — you owe them whether or not you commute. The time value is an opportunity-cost estimate: what those hours would be worth at your wage, not money you would actually have earned.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How much does commuting really cost per year?</summary>
+      <p>It costs money plus time. Add your yearly transit or fuel expenses to the value of your commute hours. For example, a 1-hour daily round trip, 5 days a week, is 260 hours a year; valued at a $48.08/hour wage that is $12,500 in time alone.</p>
+    </details>
+    <details><summary>Should I count commute time as lost income?</summary>
+      <p>That is up to you. Valuing commute hours at your hourly wage shows the opportunity cost — what that time would be worth at your rate of pay. It is an estimate of lost value, not money you would have earned.</p>
+    </details>
+    <details><summary>Is a longer commute ever worth it for higher pay?</summary>
+      <p>Compare the salary difference against your commute cost. If the raise is smaller than what the commute costs you in time and money each year, the higher-paying job pays you less in real terms.</p>
+    </details>
+    <details><summary>How do I estimate my fuel and toll costs?</summary>
+      <p>Start with your monthly spend: fuel, tolls, parking, and transit passes. Multiply by 12, then add any yearly costs like vehicle maintenance tied to commuting. Enter the monthly figure and extra yearly costs in the calculator.</p>
+    </details>
+    <details><summary>Does the calculator include car payments or insurance?</summary>
+      <p>No. Fixed costs like car payments and insurance are due whether or not you commute, so they are excluded. Only include costs that scale with commuting, plus the optional time value of your commute hours.</p>
+    </details>
+    <details><summary>How does remote work compare?</summary>
+      <p>Working from home removes both the money cost and the time cost of commuting. Enter your current commute details to see the total yearly value a remote or hybrid schedule would give you back.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free commute cost calculator. Figures are estimates based on the assumptions you enter; they are not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>.</p>
+  </div>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>
