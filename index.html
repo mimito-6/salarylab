@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary to Hourly Wage Calculator — See Your True Hourly Pay | SalaryLab</title>
+<meta name="description" content="Convert annual salary to hourly wage instantly, then factor in commute time and unpaid overtime to see your true hourly pay — the rate your paycheck actually reflects.">
+<link rel="canonical" href="https://salary.mimito6.uk/">
+<link rel="stylesheet" href="styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Salary to Hourly Wage Calculator",
+  "url": "https://salary.mimito6.uk/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert an annual salary to an hourly wage, then factor in commute time and unpaid overtime to reveal your true hourly pay."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you convert an annual salary to an hourly wage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Divide the annual salary by the number of working hours in a year. The standard calculation uses 40 hours per week × 52 weeks = 2,080 hours. For example, $100,000 ÷ 2,080 = $48.08 per hour." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'true hourly wage' and why is it lower?",
+      "acceptedAnswer": { "@type": "Answer", "text": "True hourly wage divides your salary by all the time your job actually costs you: scheduled work hours plus commuting time plus unpaid overtime. These extra hours earn you nothing, so the real rate per hour of your life is lower than the nominal rate on your offer letter." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator include taxes or paid time off?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. All figures use gross (pre-tax) salary and assume a 52-week working year. Paid vacation days are counted as work weeks, which keeps the math simple and comparable between jobs." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use 52 weeks? What about holidays and vacation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The calculator uses 52 weeks so different jobs can be compared on the same basis. Paid time off is included in the 52 weeks rather than subtracted, because the salary still covers those weeks." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for part-time workers or different schedules?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter your actual weekly hours — for example 20 hours/week at a $50,000 salary — and the calculator divides by your real yearly hours (20 × 52 = 1,040)." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does unpaid overtime affect my hourly wage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every unpaid overtime hour is added to the denominator but adds nothing to the numerator, dragging your true hourly wage down. Five unpaid overtime hours per week plus a one-hour daily commute turns a $100,000 salary into a true rate of about $38.46/hour." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/" aria-current="page">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Salary to Hourly Wage Calculator</h1>
+    <p class="lede">Your offer letter says $48 an hour. Your alarm clock, your train, and your 9&nbsp;pm Slack messages disagree. Enter your salary below — then add your commute and unpaid overtime to see the hourly rate your life actually pays for.</p>
+  </div>
+
+  <div class="card" id="calcCard">
+    <h2>Your salary, your hours</h2>
+    <p class="hint">Calculations use gross (pre-tax) salary and a 52-week year. Paid vacation is counted inside those 52 weeks.</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="salary">Annual salary (gross)</label>
+        <input id="salary" type="number" inputmode="decimal" min="0" step="any" value="100000" aria-describedby="salaryNote">
+        <small id="salaryNote">Before taxes and deductions.</small>
+      </div>
+      <div class="field">
+        <label for="hoursPerWeek">Scheduled hours per week</label>
+        <input id="hoursPerWeek" type="number" inputmode="decimal" min="0" step="any" value="40">
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label for="commuteHours">Daily commute, round trip (hours)</label>
+        <input id="commuteHours" type="number" inputmode="decimal" min="0" step="any" value="1">
+        <small>Total travel time both ways. 30 minutes each way = 1 hour.</small>
+      </div>
+      <div class="field">
+        <label for="commuteDays">Commute days per week</label>
+        <input id="commuteDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
+      </div>
+    </div>
+    <div class="field">
+      <label for="overtime">Unpaid overtime per week (hours)</label>
+      <input id="overtime" type="number" inputmode="decimal" min="0" step="any" value="0">
+      <small>Extra hours you work but are not paid for. Set to 0 if none.</small>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcSalaryBtn" type="button">Calculate my real hourly pay</button>
+    </div>
+    <p id="salaryError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="salaryResults" aria-live="polite">
+      <div class="big-number nominal">
+        <div class="eyebrow">Nominal hourly wage</div>
+        <div class="value" id="nominalValue">—</div>
+        <div class="delta">Annual salary ÷ (weekly hours × 52)</div>
+      </div>
+      <div class="big-number">
+        <div class="eyebrow">Your true hourly pay</div>
+        <div class="value" id="trueValue">—</div>
+        <div class="delta" id="trueDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Scheduled work hours / year</span><span class="v" id="lineWork">—</span></li>
+        <li><span class="k">Commute hours / year</span><span class="v" id="lineCommute">—</span></li>
+        <li><span class="k">Unpaid overtime / year</span><span class="v" id="lineOT">—</span></li>
+        <li><span class="k">Total hours your job costs you</span><span class="v" id="lineTotal">—</span></li>
+      </ul>
+      <div class="warn-note">Want the full damage in dollars, too? <a href="/commute-cost">Calculate what your commute costs per year →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">nominal = salary ÷ (hours_per_week × 52)</div>
+    <div class="formula">true = salary ÷ (work_hours + commute_hours + unpaid_overtime_hours)</div>
+    <p>Both rates come from the same salary. The nominal rate only counts scheduled hours. The true rate counts every hour the job takes from you — the 2,080 hours on paper, plus the hours on the train, plus the hours that never appear on your timesheet. That is the rate your paycheck is actually paying you.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How do you convert an annual salary to an hourly wage?</summary>
+      <p>Divide the annual salary by the number of working hours in a year. The standard calculation uses 40 hours per week × 52 weeks = 2,080 hours. For example, $100,000 ÷ 2,080 = $48.08 per hour.</p>
+    </details>
+    <details><summary>What is "true hourly wage" and why is it lower?</summary>
+      <p>True hourly wage divides your salary by all the time your job actually costs you: scheduled work hours plus commuting time plus unpaid overtime. These extra hours earn you nothing, so the real rate per hour of your life is lower than the nominal rate on your offer letter.</p>
+    </details>
+    <details><summary>Does this calculator include taxes or paid time off?</summary>
+      <p>No. All figures use gross (pre-tax) salary and assume a 52-week working year. Paid vacation days are counted as work weeks, which keeps the math simple and comparable between jobs.</p>
+    </details>
+    <details><summary>Why use 52 weeks? What about holidays and vacation?</summary>
+      <p>The calculator uses 52 weeks so different jobs can be compared on the same basis. Paid time off is included in the 52 weeks rather than subtracted, because the salary still covers those weeks.</p>
+    </details>
+    <details><summary>Does this work for part-time workers or different schedules?</summary>
+      <p>Yes. Enter your actual weekly hours — for example 20 hours/week at a $50,000 salary — and the calculator divides by your real yearly hours (20 × 52 = 1,040).</p>
+    </details>
+    <details><summary>How does unpaid overtime affect my hourly wage?</summary>
+      <p>Every unpaid overtime hour is added to the denominator but adds nothing to the numerator, dragging your true hourly wage down. Five unpaid overtime hours per week plus a one-hour daily commute turns a $100,000 salary into a true rate of about $38.46/hour.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free salary-to-hourly calculator. Figures are estimates based on gross salary and a 52-week year; they are not financial advice. Also try the <a href="/commute-cost">commute cost calculator</a>.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
