@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overtime Pay Calculator — Time-and-a-Half, Double Time &amp; Annual Earnings | SalaryLab</title>
+<meta name="description" content="Free overtime pay calculator: turn your wage and weekly overtime hours into weekly and annual overtime pay, total gross earnings, and your effective hourly rate. Time-and-a-half, double time, or any custom rate.">
+<link rel="canonical" href="https://salary.mimito6.uk/overtime-pay">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Overtime Pay Calculator",
+  "url": "https://salary.mimito6.uk/overtime-pay",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate weekly and annual overtime pay, total gross earnings, and your effective hourly rate from overtime hours and any pay multiplier."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is overtime always paid at time-and-a-half?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not everywhere. In the US, the Fair Labor Standards Act sets 1.5x as the minimum for covered nonexempt workers beyond 40 hours a week. Some states (like California) add daily overtime, and some union contracts pay double time. Many other countries set their own rates or none at all. Pick the rate that matches your contract or local law — the calculator accepts any multiplier." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between time-and-a-half and double time?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Time-and-a-half multiplies your regular hourly rate by 1.5 — at $25/hr that is $37.50 per overtime hour. Double time multiplies it by 2, or $50.00 per overtime hour in the same example. Choose 1.5x, 2x, or a custom multiplier in the calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does everyone qualify for overtime pay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. US law exempts many salaried workers (executive, administrative, professional, and some computer employees above a salary threshold) from overtime requirements. Check your job classification and local rules — this calculator computes the math, not your legal eligibility." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the results gross or net of taxes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gross. The calculator shows earnings before taxes, benefits deductions, and other withholdings. Your take-home pay will be lower, and overtime earnings are generally taxed as ordinary income." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the effective hourly rate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your total gross annual earnings divided by every hour you work, including overtime. For example, $71,500 earned across 2,600 hours gives an effective rate of $27.50/hr — higher than the $25 base rate because the overtime premium is spread over all hours." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can overtime hours be unpaid?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For nonexempt workers, hours beyond 40 in a US workweek must be paid at the overtime rate — unpaid overtime is a wage violation. Salaried exempt workers, however, usually receive no extra pay for extra hours. If you regularly work unpaid extra hours, the SalaryLab hourly wage calculator can show your true hourly rate." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay" aria-current="page">Overtime Pay</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Overtime Pay Calculator</h1>
+    <p class="lede">Ten hours of overtime a week at time-and-a-half is not "a little extra" — at $25/hr it's $19,500 a year. See exactly what your extra hours earn, and what they do to your real hourly rate.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your pay</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label>Pay basis</label>
+        <div>
+          <label style="font-weight:400;"><input type="radio" id="basisSalary" name="basis" checked> Annual salary</label><br>
+          <label style="font-weight:400;"><input type="radio" id="basisHourly" name="basis"> Hourly wage</label>
+        </div>
+      </div>
+      <div class="field" id="rowHours">
+        <label for="otHoursPerWeek">Scheduled hours per week</label>
+        <input id="otHoursPerWeek" type="number" inputmode="decimal" min="0" step="any" value="40">
+      </div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field" id="rowSalary">
+        <label for="otSalary">Annual salary (gross)</label>
+        <input id="otSalary" type="number" inputmode="decimal" min="0" step="any" value="52000">
+      </div>
+      <div class="field" id="rowHourly" style="display:none;">
+        <label for="otHourly">Hourly wage</label>
+        <input id="otHourly" type="number" inputmode="decimal" min="0" step="any" value="25">
+      </div>
+      <div class="field">
+        <label for="otHours">Overtime hours per week</label>
+        <input id="otHours" type="number" inputmode="decimal" min="0" step="any" value="10">
+      </div>
+    </div>
+
+    <h2 style="margin-top:22px;">Overtime terms</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="otMult">Overtime rate</label>
+        <select id="otMult">
+          <option value="1.5" selected>1.5× — time-and-a-half (US standard)</option>
+          <option value="2">2× — double time</option>
+          <option value="custom">Custom multiplier…</option>
+        </select>
+      </div>
+      <div class="field" id="rowCustomMult" style="display:none;">
+        <label for="otMultCustom">Custom multiplier</label>
+        <input id="otMultCustom" type="number" inputmode="decimal" min="0" step="any" value="1.5">
+      </div>
+      <div class="field">
+        <label for="otWeeks">Weeks per year</label>
+        <input id="otWeeks" type="number" inputmode="decimal" min="0" step="any" value="52">
+        <small>Adjust if you take unpaid time off.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcOvertimeBtn" type="button">Calculate my overtime pay</button>
+    </div>
+    <p id="overtimeError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="overtimeResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your overtime earns you each year</div>
+        <div class="value" id="otBig">—</div>
+        <div class="delta" id="otBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Your regular hourly rate</span><span class="v" id="otBase">—</span></li>
+        <li><span class="k">Overtime pay / week</span><span class="v" id="otWeeklyPay">—</span></li>
+        <li><span class="k">Extra hours worked / year</span><span class="v" id="otAnnualHours">—</span></li>
+        <li><span class="k">Total gross earnings / year</span><span class="v" id="otAnnualGross">—</span></li>
+        <li><span class="k">Effective hourly rate</span><span class="v" id="otEffective">—</span></li>
+      </ul>
+      <div class="warn-note" id="otPremium"></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">regular_hourly = salary ÷ (weekly_hours × 52) — or enter your hourly wage directly</div>
+    <div class="formula">overtime_pay_per_week = regular_hourly × multiplier × overtime_hours</div>
+    <div class="formula">overtime_pay_per_year = overtime_pay_per_week × weeks</div>
+    <div class="formula">effective_rate = total_gross_annual ÷ all_hours_worked (regular + overtime)</div>
+    <p>These are gross figures before taxes and deductions. Overtime rules vary by country and state: the US federal standard is 1.5× for nonexempt workers beyond 40 hours a week, some places add daily overtime or double time, and many salaried workers are exempt entirely. Choose the multiplier that matches your contract or local law.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Is overtime always paid at time-and-a-half?</summary>
+      <p>Not everywhere. In the US, the Fair Labor Standards Act sets 1.5× as the minimum for covered nonexempt workers beyond 40 hours a week. Some states (like California) add daily overtime, and some union contracts pay double time. Many other countries set their own rates or none at all. Pick the rate that matches your contract or local law — the calculator accepts any multiplier.</p>
+    </details>
+    <details><summary>What's the difference between time-and-a-half and double time?</summary>
+      <p>Time-and-a-half multiplies your regular hourly rate by 1.5 — at $25/hr that is $37.50 per overtime hour. Double time multiplies it by 2, or $50.00 per overtime hour in the same example. Choose 1.5×, 2×, or a custom multiplier above.</p>
+    </details>
+    <details><summary>Does everyone qualify for overtime pay?</summary>
+      <p>No. US law exempts many salaried workers (executive, administrative, professional, and some computer employees above a salary threshold) from overtime requirements. Check your job classification and local rules — this calculator computes the math, not your legal eligibility.</p>
+    </details>
+    <details><summary>Are the results gross or net of taxes?</summary>
+      <p>Gross. The calculator shows earnings before taxes, benefits deductions, and other withholdings. Your take-home pay will be lower, and overtime earnings are generally taxed as ordinary income.</p>
+    </details>
+    <details><summary>What is the effective hourly rate?</summary>
+      <p>Your total gross annual earnings divided by every hour you work, including overtime. For example, $71,500 earned across 2,600 hours gives an effective rate of $27.50/hr — higher than the $25 base rate because the overtime premium is spread over all hours.</p>
+    </details>
+    <details><summary>Can overtime hours be unpaid?</summary>
+      <p>For nonexempt workers, hours beyond 40 in a US workweek must be paid at the overtime rate — unpaid overtime is a wage violation. Salaried exempt workers, however, usually receive no extra pay for extra hours. If you regularly work unpaid extra hours, the <a href="/">SalaryLab hourly wage calculator</a> can show your true hourly rate.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free overtime pay calculator. Figures are estimates based on gross pay and the rate you select; they are not financial or legal advice. Also try the <a href="/">salary to hourly wage calculator</a> and the <a href="/commute-cost">commute cost calculator</a>.</p>
+  </div>
+</footer>
+<script src="../overtime.js"></script>
+</body>
+</html>
