@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hourly to Salary Calculator — Convert Your Hourly Wage to Annual Pay | SalaryLab</title>
+<meta name="description" content="Free hourly to salary calculator: turn your hourly wage into weekly, biweekly, monthly, and annual gross pay for any schedule — full-time, part-time, or seasonal.">
+<link rel="canonical" href="https://salary.mimito6.uk/hourly-to-salary">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Hourly to Salary Calculator",
+  "url": "https://salary.mimito6.uk/hourly-to-salary",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert an hourly wage into weekly, biweekly, monthly, and annual gross pay for any weekly schedule and number of working weeks."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you convert an hourly wage to an annual salary?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Multiply your hourly wage by your hours per week, then by your weeks per year. The standard full-time case is $25/hr × 40 hours × 52 weeks = $52,000 a year. Adjust the weeks if you take unpaid time off or work seasonally." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my monthly pay not just my weekly pay times 4?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because a month is not 4 weeks — it averages 4.333 weeks (52 weeks ÷ 12 months). Monthly pay is annual pay ÷ 12. At $25/hr and 40 hours a week, weekly pay is $1,000 but monthly pay is $4,333.33, not $4,000." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does biweekly pay differ from twice a month?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Biweekly means every two weeks, which gives 26 paychecks a year. Twice a month (semimonthly) gives 24 paychecks. At $1,000 a week, a biweekly check is $2,000 and there are two months a year with three paychecks." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures gross or net of taxes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gross. All figures are before income tax, Social Security, Medicare, and any benefits deductions. Your take-home pay will be lower, and the exact difference depends on your tax situation." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my hours vary week to week?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Enter your average hours per week. If your schedule swings a lot, run the calculator twice — once with your low week and once with your high week — to see the range your annual pay can land in." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this include overtime pay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator assumes every hour is paid at the same rate. If you regularly work overtime at a premium rate, use the SalaryLab overtime pay calculator to add that on top." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary" aria-current="page">Hourly to Salary</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Hourly to Salary Calculator</h1>
+    <p class="lede">A job offer says $25 an hour. What does that actually pay you in a year? Enter your wage and your real schedule — full-time, part-time, or seasonal — and see your weekly, biweekly, monthly, and annual gross pay.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your wage and schedule</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="hsHourly">Hourly wage (gross)</label>
+        <input id="hsHourly" type="number" inputmode="decimal" min="0" step="any" value="25">
+      </div>
+      <div class="field">
+        <label for="hsHoursPerWeek">Hours per week</label>
+        <input id="hsHoursPerWeek" type="number" inputmode="decimal" min="0" step="any" value="40">
+      </div>
+      <div class="field">
+        <label for="hsWeeks">Weeks per year</label>
+        <input id="hsWeeks" type="number" inputmode="decimal" min="0" step="any" value="52">
+        <small>Use fewer weeks if you take unpaid time off or work seasonally.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcHourlyBtn" type="button">Calculate my annual pay</button>
+    </div>
+    <p id="hsError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="hsResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your gross pay per year</div>
+        <div class="value" id="hsBig">—</div>
+        <div class="delta" id="hsBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Per week</span><span class="v" id="hsWeekly">—</span></li>
+        <li><span class="k">Per biweekly paycheck (26/year)</span><span class="v" id="hsBiweekly">—</span></li>
+        <li><span class="k">Per month (annual ÷ 12)</span><span class="v" id="hsMonthly">—</span></li>
+        <li><span class="k">Per year</span><span class="v" id="hsAnnual">—</span></li>
+        <li><span class="k">Hours worked per year</span><span class="v" id="hsHours">—</span></li>
+      </ul>
+      <div class="warn-note">Working paid overtime on top of this? <a href="/overtime-pay">Add your overtime pay →</a> And if you commute, <a href="/commute-cost">see what the trip costs you per year →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">annual = hourly × hours_per_week × weeks_per_year</div>
+    <div class="formula">weekly = hourly × hours_per_week</div>
+    <div class="formula">biweekly = weekly × 2 (26 paychecks a year)</div>
+    <div class="formula">monthly = annual ÷ 12 (not weekly × 4 — a month averages 4.333 weeks)</div>
+    <p>Example: $25/hr × 40 hours × 52 weeks = $52,000 a year — $1,000 a week, $2,000 per biweekly paycheck, and $4,333.33 a month. All figures are gross, before taxes and deductions. If some of your hours are paid at an overtime premium, this calculator understates your pay: it prices every hour at the same rate.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How do you convert an hourly wage to an annual salary?</summary>
+      <p>Multiply your hourly wage by your hours per week, then by your weeks per year. The standard full-time case is $25/hr × 40 hours × 52 weeks = $52,000 a year. Adjust the weeks if you take unpaid time off or work seasonally.</p>
+    </details>
+    <details><summary>Why is my monthly pay not just my weekly pay times 4?</summary>
+      <p>Because a month is not 4 weeks — it averages 4.333 weeks (52 weeks ÷ 12 months). Monthly pay is annual pay ÷ 12. At $25/hr and 40 hours a week, weekly pay is $1,000 but monthly pay is $4,333.33, not $4,000.</p>
+    </details>
+    <details><summary>How does biweekly pay differ from twice a month?</summary>
+      <p>Biweekly means every two weeks, which gives 26 paychecks a year. Twice a month (semimonthly) gives 24 paychecks. At $1,000 a week, a biweekly check is $2,000 and there are two months a year with three paychecks.</p>
+    </details>
+    <details><summary>Are these figures gross or net of taxes?</summary>
+      <p>Gross. All figures are before income tax, Social Security, Medicare, and any benefits deductions. Your take-home pay will be lower, and the exact difference depends on your tax situation.</p>
+    </details>
+    <details><summary>What if my hours vary week to week?</summary>
+      <p>Enter your average hours per week. If your schedule swings a lot, run the calculator twice — once with your low week and once with your high week — to see the range your annual pay can land in.</p>
+    </details>
+    <details><summary>Does this include overtime pay?</summary>
+      <p>No. This calculator assumes every hour is paid at the same rate. If you regularly work overtime at a premium rate, use the <a href="/overtime-pay">SalaryLab overtime pay calculator</a> to add that on top.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free hourly to salary calculator. Figures are gross estimates before taxes and deductions; they are not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, and the <a href="/overtime-pay">overtime pay calculator</a>.</p>
+  </div>
+</footer>
+<script src="../hourly.js"></script>
+</body>
+</html>
