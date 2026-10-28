@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paycheck Calculator — Gross Pay Per Paycheck, With Overtime | SalaryLab</title>
+<meta name="description" content="Free paycheck calculator: enter your hourly wage, regular and overtime hours per pay period, and pay frequency to see your gross pay per paycheck and your estimated annual pay.">
+<link rel="canonical" href="https://salary.mimito6.uk/paycheck">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Paycheck Calculator",
+  "url": "https://salary.mimito6.uk/paycheck",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate gross pay per paycheck from an hourly wage, regular and overtime hours per pay period, an overtime multiplier, and pay frequency, with an estimated annual total."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is my gross paycheck calculated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Regular pay is your hourly wage times your regular hours in the pay period; overtime pay is your wage times your overtime multiplier times your overtime hours. Add them together. Example: $25/hr × 80 regular hours = $2,000, plus 10 overtime hours at 1.5× ($375), gives $2,375 gross per biweekly paycheck." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my biweekly paycheck not half of my monthly pay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because biweekly pay has 26 paychecks a year and monthly pay has 12. A $2,375 biweekly check annualizes to $61,750, which is $5,145.83 a month — not $4,750. Biweekly pay also gives you two months a year with three paychecks." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many hours go in a semimonthly pay period?",
+      "acceptedAnswer": { "@type": "Answer", "text": "At a 40-hour week, a semimonthly period averages 86.67 hours (2,080 hours a year ÷ 24 checks), not 80. Entering 80 hours for a semimonthly check understates your year: $30/hr × 80 hours × 24 checks = $57,600, while the correct 86.67-hour figure gives $62,400." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures gross or net of taxes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gross. All figures are before income tax, Social Security, Medicare, and any benefits deductions. Your take-home pay will be lower, and the exact difference depends on your tax situation." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the annual estimate assume?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It assumes every paycheck in the year looks exactly like the one you entered — same hours, same overtime, same rate. If your overtime varies, the annual figure is a projection of this paycheck, not a promise." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this apply to salaried or exempt workers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. This calculator assumes you are paid by the hour with an overtime premium. Exempt salaried workers often do not earn overtime pay at all, and eligibility depends on your job classification and local law. The tool calculates the math; it does not give legal advice." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck" aria-current="page">Paycheck</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Paycheck Calculator</h1>
+    <p class="lede">Your pay stub says one number; your hours say another. Enter your wage, the regular and overtime hours in this pay period, and how often you are paid — and see exactly how that paycheck adds up, gross, before taxes.</p>
+  </div>
+
+  <div class="card">
+    <h2>This paycheck</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="pcHourly">Hourly wage (gross)</label>
+        <input id="pcHourly" type="number" inputmode="decimal" min="0" step="any" value="25">
+      </div>
+      <div class="field">
+        <label for="pcFreq">Pay frequency</label>
+        <select id="pcFreq">
+          <option value="52">Weekly (52 paychecks/year)</option>
+          <option value="26" selected>Biweekly (26 paychecks/year)</option>
+          <option value="24">Semimonthly (24 paychecks/year)</option>
+          <option value="12">Monthly (12 paychecks/year)</option>
+        </select>
+        <small>Hours below are per pay period, not per week.</small>
+      </div>
+      <div class="field">
+        <label for="pcRegHours">Regular hours in this pay period</label>
+        <input id="pcRegHours" type="number" inputmode="decimal" min="0" step="any" value="80">
+        <small>Biweekly at 40 hrs/week = 80. Semimonthly at 40 hrs/week averages 86.67.</small>
+      </div>
+      <div class="field">
+        <label for="pcOtHours">Overtime hours in this pay period</label>
+        <input id="pcOtHours" type="number" inputmode="decimal" min="0" step="any" value="10">
+      </div>
+      <div class="field">
+        <label for="pcMult">Overtime multiplier</label>
+        <input id="pcMult" type="number" inputmode="decimal" min="0" step="any" value="1.5">
+        <small>1.5 is the usual time-and-a-half; use 2 for double time.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcPaycheckBtn" type="button">Calculate my paycheck</button>
+    </div>
+    <p id="pcError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="pcResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your gross pay per paycheck</div>
+        <div class="value" id="pcBig">—</div>
+        <div class="delta" id="pcBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Regular pay</span><span class="v" id="pcRegular">—</span></li>
+        <li><span class="k">Overtime pay</span><span class="v" id="pcOvertime">—</span></li>
+        <li><span class="k">Gross per paycheck</span><span class="v" id="pcGross">—</span></li>
+        <li><span class="k">Estimated annual gross</span><span class="v" id="pcAnnual">—</span></li>
+        <li><span class="k">Effective hourly rate</span><span class="v" id="pcEffective">—</span></li>
+        <li><span class="k">Total hours in this period</span><span class="v" id="pcTotalHours">—</span></li>
+      </ul>
+      <div class="warn-note">Want the yearly picture from a weekly schedule instead? <a href="/hourly-to-salary">Convert hourly wage to annual salary →</a> And to price the overtime alone, <a href="/overtime-pay">use the overtime pay calculator →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">regular = hourly × regular_hours</div>
+    <div class="formula">overtime = hourly × multiplier × overtime_hours</div>
+    <div class="formula">gross per paycheck = regular + overtime</div>
+    <div class="formula">estimated annual = gross per paycheck × paychecks per year</div>
+    <p>Example: $25/hr × 80 regular hours = $2,000, plus 10 overtime hours at 1.5× = $375, gives $2,375 gross per biweekly paycheck — $61,750 over 26 paychecks, at an effective $26.39/hr across all 90 hours. Watch the semimonthly trap: at a 40-hour week a semimonthly period averages 86.67 hours (2,080 ÷ 24), not 80 — entering 80 understates the year by $4,800 at $30/hr. All figures are gross, before taxes and deductions, and the annual figure assumes every paycheck repeats this one.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How is my gross paycheck calculated?</summary>
+      <p>Regular pay is your hourly wage times your regular hours in the pay period; overtime pay is your wage times your overtime multiplier times your overtime hours. Add them together. Example: $25/hr × 80 regular hours = $2,000, plus 10 overtime hours at 1.5× ($375), gives $2,375 gross per biweekly paycheck.</p>
+    </details>
+    <details><summary>Why is my biweekly paycheck not half of my monthly pay?</summary>
+      <p>Because biweekly pay has 26 paychecks a year and monthly pay has 12. A $2,375 biweekly check annualizes to $61,750, which is $5,145.83 a month — not $4,750. Biweekly pay also gives you two months a year with three paychecks.</p>
+    </details>
+    <details><summary>How many hours go in a semimonthly pay period?</summary>
+      <p>At a 40-hour week, a semimonthly period averages 86.67 hours (2,080 hours a year ÷ 24 checks), not 80. Entering 80 hours for a semimonthly check understates your year: $30/hr × 80 hours × 24 checks = $57,600, while the correct 86.67-hour figure gives $62,400.</p>
+    </details>
+    <details><summary>Are these figures gross or net of taxes?</summary>
+      <p>Gross. All figures are before income tax, Social Security, Medicare, and any benefits deductions. Your take-home pay will be lower, and the exact difference depends on your tax situation.</p>
+    </details>
+    <details><summary>What does the annual estimate assume?</summary>
+      <p>It assumes every paycheck in the year looks exactly like the one you entered — same hours, same overtime, same rate. If your overtime varies, the annual figure is a projection of this paycheck, not a promise.</p>
+    </details>
+    <details><summary>Does this apply to salaried or exempt workers?</summary>
+      <p>Not necessarily. This calculator assumes you are paid by the hour with an overtime premium. Exempt salaried workers often do not earn overtime pay at all, and eligibility depends on your job classification and local law. The tool calculates the math; it does not give legal advice.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free paycheck calculator. Figures are gross estimates before taxes and deductions; they are not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, and the <a href="/hourly-to-salary">hourly to salary calculator</a>.</p>
+  </div>
+</footer>
+<script src="../paycheck.js"></script>
+</body>
+</html>
