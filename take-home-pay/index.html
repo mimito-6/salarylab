@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Take-Home Pay Calculator — Gross to Net Per Paycheck | SalaryLab</title>
+<meta name="description" content="Free take-home pay calculator: enter your gross pay per paycheck, pay frequency, a tax rate, and other deductions to see your net pay per paycheck, per month, and per year.">
+<link rel="canonical" href="https://salary.mimito6.uk/take-home-pay">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Take-Home Pay Calculator",
+  "url": "https://salary.mimito6.uk/take-home-pay",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate take-home (net) pay per paycheck, per month, and per year from gross pay per paycheck, pay frequency, a user-supplied tax rate, and other deductions."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is my take-home pay calculated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tax withheld is your gross pay times your tax rate; subtract that and your other deductions from gross pay. Example: $2,375 gross biweekly at a 22% tax rate gives $522.50 of tax; minus $150 of other deductions, take-home pay is $1,702.50 per paycheck, or $44,265 a year over 26 paychecks." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is a single flat tax rate only an approximation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Real income tax is progressive: different slices of income are taxed at different rates, and credits, deductions, and state rules change the total. A flat rate is a useful estimate, not a tax return. For the closest estimate, use the effective rate from your own pay stub (total tax withheld divided by gross pay) rather than your top marginal bracket." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do I find my tax rate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Look at a recent pay stub: divide the total tax withheld on that check (federal plus state, if any) by the gross pay on the same check. If $522.50 of tax was withheld from $2,375 gross, your effective rate is 22%. Using that figure already reflects your pre-tax deductions approximately, because it comes from your real withholding." }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as other deductions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Anything taken out of your check that is not tax: health insurance premiums, retirement contributions, union dues, and similar items. Enter the total per paycheck. If an item is pre-tax, your pay-stub effective rate already reflects it, so do not also try to adjust the tax rate for it — just include the dollar amount here." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my monthly take-home not twice my biweekly take-home?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because biweekly pay has 26 paychecks a year and a month averages 26 ÷ 12 = 2.1667 paychecks, not 2. A $1,702.50 biweekly check is $3,688.75 a month ($44,265 ÷ 12), not $3,405. The same applies in reverse: a monthly check is simply its own amount, since there are 12 of them." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this tax advice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only does the arithmetic on the rate and deductions you enter. It does not estimate your tax liability, choose a withholding amount, or replace a tax professional. For decisions about withholding, use your employer's withholding form and, if unsure, a tax professional." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay" aria-current="page">Take-Home Pay</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Take-Home Pay Calculator</h1>
+    <p class="lede">Gross pay is the number on the offer letter; take-home pay is the number that pays your rent. Enter your gross pay per paycheck, how often you are paid, your tax rate, and your other deductions — and see what actually lands in your account.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your paycheck, after deductions</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="thGross">Gross pay per paycheck</label>
+        <input id="thGross" type="number" inputmode="decimal" min="0" step="any" value="2375">
+        <small>Before taxes and deductions. From the <a href="/paycheck">paycheck calculator</a> if you start from hours.</small>
+      </div>
+      <div class="field">
+        <label for="thFreq">Pay frequency</label>
+        <select id="thFreq">
+          <option value="52">Weekly (52 paychecks/year)</option>
+          <option value="26" selected>Biweekly (26 paychecks/year)</option>
+          <option value="24">Semimonthly (24 paychecks/year)</option>
+          <option value="12">Monthly (12 paychecks/year)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="thRate">Tax rate (%)</label>
+        <input id="thRate" type="number" inputmode="decimal" min="0" max="100" step="any" value="22">
+        <small>Your effective rate from a pay stub: total tax withheld ÷ gross pay. A flat rate is an estimate — real tax is progressive.</small>
+      </div>
+      <div class="field">
+        <label for="thOther">Other deductions per paycheck</label>
+        <input id="thOther" type="number" inputmode="decimal" min="0" step="any" value="150">
+        <small>Health insurance, retirement, union dues — anything withheld that is not tax.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcTakeHomeBtn" type="button">Calculate my take-home pay</button>
+    </div>
+    <p id="thError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="thResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your take-home pay per paycheck</div>
+        <div class="value" id="thBig">—</div>
+        <div class="delta" id="thBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Tax withheld per paycheck</span><span class="v" id="thTax">—</span></li>
+        <li><span class="k">Other deductions per paycheck</span><span class="v" id="thOtherOut">—</span></li>
+        <li><span class="k">Take-home pay per paycheck</span><span class="v" id="thNet">—</span></li>
+        <li><span class="k">Take-home pay per month</span><span class="v" id="thMonthlyNet">—</span></li>
+        <li><span class="k">Take-home pay per year</span><span class="v" id="thAnnualNet">—</span></li>
+        <li><span class="k">Take-home share of gross</span><span class="v" id="thTakeHomePct">—</span></li>
+        <li><span class="k">Gross pay per year</span><span class="v" id="thAnnualGross">—</span></li>
+      </ul>
+      <div class="warn-note">Starting from hours instead of a gross figure? <a href="/paycheck">Calculate your gross paycheck first →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">tax per paycheck = gross × (tax rate ÷ 100)</div>
+    <div class="formula">take-home per paycheck = gross − tax − other deductions</div>
+    <div class="formula">take-home per year = take-home per paycheck × paychecks per year</div>
+    <div class="formula">take-home per month = take-home per year ÷ 12</div>
+    <p>Example: $2,375 gross biweekly at 22% gives $522.50 of tax; minus $150 of other deductions, take-home pay is $1,702.50 per paycheck — $44,265 a year, $3,688.75 a month, and 71.7% of gross. Note the monthly step: it divides the annual figure by 12, it does not multiply a biweekly check by 2 (there are 26 biweekly checks a year, not 24). The flat rate is an approximation: real income tax is progressive, so the closest input is the effective rate from your own pay stub, and this tool is arithmetic, not tax advice.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How is my take-home pay calculated?</summary>
+      <p>Tax withheld is your gross pay times your tax rate; subtract that and your other deductions from gross pay. Example: $2,375 gross biweekly at a 22% tax rate gives $522.50 of tax; minus $150 of other deductions, take-home pay is $1,702.50 per paycheck, or $44,265 a year over 26 paychecks.</p>
+    </details>
+    <details><summary>Why is a single flat tax rate only an approximation?</summary>
+      <p>Real income tax is progressive: different slices of income are taxed at different rates, and credits, deductions, and state rules change the total. A flat rate is a useful estimate, not a tax return. For the closest estimate, use the effective rate from your own pay stub (total tax withheld divided by gross pay) rather than your top marginal bracket.</p>
+    </details>
+    <details><summary>Where do I find my tax rate?</summary>
+      <p>Look at a recent pay stub: divide the total tax withheld on that check (federal plus state, if any) by the gross pay on the same check. If $522.50 of tax was withheld from $2,375 gross, your effective rate is 22%. Using that figure already reflects your pre-tax deductions approximately, because it comes from your real withholding.</p>
+    </details>
+    <details><summary>What counts as other deductions?</summary>
+      <p>Anything taken out of your check that is not tax: health insurance premiums, retirement contributions, union dues, and similar items. Enter the total per paycheck. If an item is pre-tax, your pay-stub effective rate already reflects it, so do not also try to adjust the tax rate for it — just include the dollar amount here.</p>
+    </details>
+    <details><summary>Why is my monthly take-home not twice my biweekly take-home?</summary>
+      <p>Because biweekly pay has 26 paychecks a year and a month averages 26 ÷ 12 = 2.1667 paychecks, not 2. A $1,702.50 biweekly check is $3,688.75 a month ($44,265 ÷ 12), not $3,405. The same applies in reverse: a monthly check is simply its own amount, since there are 12 of them.</p>
+    </details>
+    <details><summary>Is this tax advice?</summary>
+      <p>No. This tool only does the arithmetic on the rate and deductions you enter. It does not estimate your tax liability, choose a withholding amount, or replace a tax professional. For decisions about withholding, use your employer's withholding form and, if unsure, a tax professional.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free take-home pay calculator. Figures are estimates from the rate and deductions you enter; they are not tax advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, the <a href="/hourly-to-salary">hourly to salary calculator</a>, and the <a href="/paycheck">paycheck calculator</a>.</p>
+  </div>
+</footer>
+<script src="../takehome.js"></script>
+</body>
+</html>
