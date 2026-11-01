@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Raise Calculator — What a Raise Is Worth Per Year, Month &amp; Hour | SalaryLab</title>
+<meta name="description" content="Free salary raise calculator: enter your current annual salary and a raise percentage to see your new salary per year, per month, and per hour — plus what raise you need to reach a target salary.">
+<link rel="canonical" href="https://salary.mimito6.uk/salary-raise">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Salary Raise Calculator",
+  "url": "https://salary.mimito6.uk/salary-raise",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate a new annual salary from a current salary and a raise percentage, with the raise expressed per year, per month, and per hour — and the reverse lookup of what raise reaches a target salary."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is my new salary calculated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Multiply your current salary by one plus the raise percentage. Example: $60,000 with a 5% raise becomes $63,000 a year — $3,000 more a year, $250 more a month, and $1.44 more an hour on a 40-hour, 52-week schedule." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the hourly figure depend on my schedule?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Hourly pay is annual salary divided by hours worked in the year. A $60,000 salary is $28.85 an hour at 40 hours over 52 weeks (2,080 hours), but $28.85 only holds for that schedule — part-time or seasonal schedules divide by fewer hours, so the same salary is a higher hourly rate." }
+    },
+    {
+      "@type": "Question",
+      "name": "What raise do I need to reach a target salary?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Divide the gap by your current salary. To go from $60,000 to $66,000 you need a 10% raise ($6,000 ÷ $60,000). Use the reverse lookup below the main calculator: enter your target salary and it gives the percentage, the annual gap, and the monthly gap." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a percentage raise the same as a flat raise?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. A 5% raise on $60,000 is $3,000, but 5% on $100,000 is $5,000 — the same percentage is worth more at a higher salary. A flat $3,000 raise is 5% at $60,000 but only 3% at $100,000. Compare offers in both dollars and percent before judging them." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures before or after tax?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Before tax. All figures here are gross: the raise is $3,000 a year gross, and what lands in your account is less after tax and deductions. To see the after-tax side, run the new salary through the take-home pay calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for a pay cut?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The math works in reverse — a negative percentage is a cut — but this tool only accepts raises of 0% or more, so a cut is not silently priced as a raise. To price a cut, compute the new salary directly: current salary times one plus the cut percentage (for example, $60,000 × 0.95 = $57,000 for a 5% cut)." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise" aria-current="page">Salary Raise</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Salary Raise Calculator</h1>
+    <p class="lede">A raise quoted as a percentage sounds small until you price it. Enter your current salary and the raise percentage — and see what it is worth per year, per month, and per hour, plus what raise you would need to reach a target salary.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your raise, priced</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="rCurrent">Current annual salary</label>
+        <input id="rCurrent" type="number" inputmode="decimal" min="0" step="any" value="60000">
+        <small>Gross, before tax. From the <a href="/hourly-to-salary">hourly to salary calculator</a> if you start from an hourly wage.</small>
+      </div>
+      <div class="field">
+        <label for="rPct">Raise (%)</label>
+        <input id="rPct" type="number" inputmode="decimal" min="0" step="any" value="5">
+        <small>The percentage in your offer or review. 0% is valid — it just means no change.</small>
+      </div>
+      <div class="field">
+        <label for="rHours">Hours per week</label>
+        <input id="rHours" type="number" inputmode="decimal" min="0" step="any" value="40">
+        <small>Used only for the hourly figures; the annual figures do not depend on it.</small>
+      </div>
+      <div class="field">
+        <label for="rWeeks">Weeks per year</label>
+        <input id="rWeeks" type="number" inputmode="decimal" min="0" step="any" value="52">
+        <small>52 for a full year; lower for seasonal work. Annual hours = hours per week × weeks per year.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcRaiseBtn" type="button">Calculate my raise</button>
+    </div>
+    <p id="rError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="rResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your new annual salary</div>
+        <div class="value" id="rBig">—</div>
+        <div class="delta" id="rBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">New annual salary</span><span class="v" id="rNewAnnual">—</span></li>
+        <li><span class="k">Raise per year</span><span class="v" id="rAnnualDiff">—</span></li>
+        <li><span class="k">Raise per month</span><span class="v" id="rMonthlyDiff">—</span></li>
+        <li><span class="k">New monthly salary</span><span class="v" id="rNewMonthly">—</span></li>
+        <li><span class="k">Current monthly salary</span><span class="v" id="rCurrentMonthly">—</span></li>
+        <li><span class="k">Current hourly rate</span><span class="v" id="rHourlyOld">—</span></li>
+        <li><span class="k">New hourly rate</span><span class="v" id="rHourlyNew">—</span></li>
+        <li><span class="k">Raise per hour</span><span class="v" id="rHourlyDiff">—</span></li>
+      </ul>
+      <div class="warn-note">All figures are gross, before tax. To see what the new salary pays after deductions, try the <a href="/take-home-pay">take-home pay calculator →</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Reverse lookup: what raise reaches my target?</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="tTarget">Target annual salary</label>
+        <input id="tTarget" type="number" inputmode="decimal" min="0" step="any" value="66000">
+        <small>Uses the current salary from the calculator above. The target must be at or above it.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcTargetBtn" type="button">What raise do I need?</button>
+    </div>
+    <p id="tError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+    <div class="results" id="tResults" aria-live="polite">
+      <ul class="result-lines">
+        <li><span class="k">Raise needed</span><span class="v" id="tNeeded">—</span></li>
+        <li><span class="k">Annual gap</span><span class="v" id="tAnnualDiff">—</span></li>
+        <li><span class="k">Monthly gap</span><span class="v" id="tMonthlyDiff">—</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">new annual salary = current salary × (1 + raise % ÷ 100)</div>
+    <div class="formula">raise per month = (new salary − current salary) ÷ 12</div>
+    <div class="formula">hourly rate = annual salary ÷ (hours per week × weeks per year)</div>
+    <div class="formula">raise needed for a target = (target − current) ÷ current × 100%</div>
+    <p>Example: $60,000 with a 5% raise becomes $63,000 a year — $3,000 more a year, $250 more a month, and $1.44 more an hour on a 40-hour, 52-week schedule (2,080 hours a year). The hourly step is schedule-sensitive: the same $60,000 at 20 hours a week over 52 weeks is $57.69 an hour (1,040 hours a year), not $28.85, so enter your real schedule rather than assuming 40 × 52. And remember the percentage trap: 5% is $3,000 at $60,000 but $5,000 at $100,000, so judge an offer in dollars as well as percent.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How is my new salary calculated?</summary>
+      <p>Multiply your current salary by one plus the raise percentage. Example: $60,000 with a 5% raise becomes $63,000 a year — $3,000 more a year, $250 more a month, and $1.44 more an hour on a 40-hour, 52-week schedule.</p>
+    </details>
+    <details><summary>Why does the hourly figure depend on my schedule?</summary>
+      <p>Hourly pay is annual salary divided by hours worked in the year. A $60,000 salary is $28.85 an hour at 40 hours over 52 weeks (2,080 hours), but part-time or seasonal schedules divide by fewer hours, so the same salary is a higher hourly rate.</p>
+    </details>
+    <details><summary>What raise do I need to reach a target salary?</summary>
+      <p>Divide the gap by your current salary. To go from $60,000 to $66,000 you need a 10% raise ($6,000 ÷ $60,000). Use the reverse lookup above: enter your target salary and it gives the percentage, the annual gap, and the monthly gap.</p>
+    </details>
+    <details><summary>Is a percentage raise the same as a flat raise?</summary>
+      <p>No. A 5% raise on $60,000 is $3,000, but 5% on $100,000 is $5,000 — the same percentage is worth more at a higher salary. A flat $3,000 raise is 5% at $60,000 but only 3% at $100,000. Compare offers in both dollars and percent before judging them.</p>
+    </details>
+    <details><summary>Are these figures before or after tax?</summary>
+      <p>Before tax. All figures here are gross: the raise is $3,000 a year gross, and what lands in your account is less after tax and deductions. To see the after-tax side, run the new salary through the take-home pay calculator.</p>
+    </details>
+    <details><summary>Can I use this for a pay cut?</summary>
+      <p>The math works in reverse — a negative percentage is a cut — but this tool only accepts raises of 0% or more, so a cut is not silently priced as a raise. To price a cut, compute the new salary directly: current salary times one plus the cut percentage (for example, $60,000 × 0.95 = $57,000 for a 5% cut).</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free salary raise calculator. Figures are gross estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, the <a href="/hourly-to-salary">hourly to salary calculator</a>, the <a href="/paycheck">paycheck calculator</a>, and the <a href="/take-home-pay">take-home pay calculator</a>.</p>
+  </div>
+</footer>
+<script src="../raise.js"></script>
+</body>
+</html>
