@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Offer Comparison Calculator — Compare Two Salaries by Effective Hourly Rate | SalaryLab</title>
+<meta name="description" content="Free job offer comparison calculator: enter two offers — salary, hours, paid time off, bonus, benefits, and commute cost — to compare them by effective hourly rate and total compensation, not just the headline salary.">
+<link rel="canonical" href="https://salary.mimito6.uk/job-offer-comparison">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Job Offer Comparison Calculator",
+  "url": "https://salary.mimito6.uk/job-offer-comparison",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compare two job offers by effective hourly rate and total compensation: salary, hours per week, paid time off, bonus, other benefits, and commute cost, all priced into one honest comparison."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why isn't the higher salary always the better offer?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Salary alone ignores how many hours buy it. An $80,000 offer at 40 hours a week pays $38.46 an effective hour, while a $78,000 offer at 35 hours a week pays $42.86 — the lower salary is $4.40 an hour better, even though it pays $2,000 less a year. Add paid time off, bonuses, benefits, and commute cost, and the headline number moves even further." }
+    },
+    {
+      "@type": "Question",
+      "name": "How are paid days off counted?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Paid time off is paid, so it shrinks your working hours, not your pay. Working hours equal scheduled hours minus PTO days times hours per day (hours per week divided by 5). Example: 40 hours a week over 52 weeks is 2,080 scheduled hours; 10 PTO days remove 80 hours, leaving 2,000 working hours — so a $60,000 salary is $30.00 an effective hour, not $28.85." }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as other benefits?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Anything the employer pays on top of salary and bonus, priced per year: 401(k) match, stock or RSUs, and health-insurance premiums the employer covers. Enter the annual dollar value. If you cannot price a benefit, leave it at $0 rather than guessing — the comparison stays honest about what it does and does not include." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why subtract the commute cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Commute cost comes out of the same pay, so an offer that costs $200 a month to reach is really $2,400 a year less. The calculator subtracts twelve months of commute cost from salary, bonus, and benefits to give total compensation. For the exact commute figure, use the commute cost calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if one offer wins on total pay and the other on hourly rate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That split is real and the calculator shows both verdicts instead of picking one for you. The higher-total offer pays more money; the higher-hourly offer buys that money with fewer of your hours. Choosing between them is a time-versus-money decision, not a math error." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures before or after tax?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Before tax. All figures here are gross: total compensation and effective hourly rate are pre-tax. To see what each offer pays after deductions, run the winning total through the take-home pay calculator." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison" aria-current="page">Job Offer</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Job Offer Comparison Calculator</h1>
+    <p class="lede">The higher salary is not always the better offer. Enter two offers — salary, hours, paid time off, bonus, benefits, and commute cost — and compare them by effective hourly rate and total compensation, not just the headline number.</p>
+  </div>
+
+  <div class="card">
+    <h2>Two offers, side by side</h2>
+    <p class="hint">All figures are gross, before tax. Leave bonus, benefits, and commute at $0 if they do not apply — the comparison stays honest about what it includes.</p>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <h3>Offer A</h3>
+        <div class="field">
+          <label for="aName">Label (optional)</label>
+          <input id="aName" type="text" value="" placeholder="e.g. Current job">
+        </div>
+        <div class="field">
+          <label for="aSalary">Annual salary</label>
+          <input id="aSalary" type="number" inputmode="decimal" min="0" step="any" value="60000">
+        </div>
+        <div class="field">
+          <label for="aHours">Hours per week</label>
+          <input id="aHours" type="number" inputmode="decimal" min="0" step="any" value="40">
+        </div>
+        <div class="field">
+          <label for="aWeeks">Weeks per year</label>
+          <input id="aWeeks" type="number" inputmode="decimal" min="0" step="any" value="52">
+        </div>
+        <div class="field">
+          <label for="aPto">Paid time off (days / year)</label>
+          <input id="aPto" type="number" inputmode="decimal" min="0" step="any" value="10">
+          <small>Paid days off shrink working hours, not pay.</small>
+        </div>
+        <div class="field">
+          <label for="aBonus">Annual bonus</label>
+          <input id="aBonus" type="number" inputmode="decimal" min="0" step="any" value="0">
+        </div>
+        <div class="field">
+          <label for="aBenefits">Other benefits (per year)</label>
+          <input id="aBenefits" type="number" inputmode="decimal" min="0" step="any" value="0">
+          <small>401(k) match, stock, employer-paid health premiums — annual dollar value.</small>
+        </div>
+        <div class="field">
+          <label for="aCommute">Commute cost (per month)</label>
+          <input id="aCommute" type="number" inputmode="decimal" min="0" step="any" value="0">
+          <small>From the <a href="/commute-cost">commute cost calculator</a> if you want the exact figure.</small>
+        </div>
+      </div>
+      <div class="offer-card">
+        <h3>Offer B</h3>
+        <div class="field">
+          <label for="bName">Label (optional)</label>
+          <input id="bName" type="text" value="" placeholder="e.g. New offer">
+        </div>
+        <div class="field">
+          <label for="bSalary">Annual salary</label>
+          <input id="bSalary" type="number" inputmode="decimal" min="0" step="any" value="70000">
+        </div>
+        <div class="field">
+          <label for="bHours">Hours per week</label>
+          <input id="bHours" type="number" inputmode="decimal" min="0" step="any" value="45">
+        </div>
+        <div class="field">
+          <label for="bWeeks">Weeks per year</label>
+          <input id="bWeeks" type="number" inputmode="decimal" min="0" step="any" value="52">
+        </div>
+        <div class="field">
+          <label for="bPto">Paid time off (days / year)</label>
+          <input id="bPto" type="number" inputmode="decimal" min="0" step="any" value="15">
+          <small>Paid days off shrink working hours, not pay.</small>
+        </div>
+        <div class="field">
+          <label for="bBonus">Annual bonus</label>
+          <input id="bBonus" type="number" inputmode="decimal" min="0" step="any" value="5000">
+        </div>
+        <div class="field">
+          <label for="bBenefits">Other benefits (per year)</label>
+          <input id="bBenefits" type="number" inputmode="decimal" min="0" step="any" value="2000">
+          <small>401(k) match, stock, employer-paid health premiums — annual dollar value.</small>
+        </div>
+        <div class="field">
+          <label for="bCommute">Commute cost (per month)</label>
+          <input id="bCommute" type="number" inputmode="decimal" min="0" step="any" value="200">
+          <small>From the <a href="/commute-cost">commute cost calculator</a> if you want the exact figure.</small>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcCompareBtn" type="button">Compare the offers</button>
+    </div>
+    <p id="cError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="cResults" aria-live="polite">
+      <div class="offer-grid">
+        <div class="offer-card">
+          <h3><span id="aTitle">Offer A</span><span class="winner-tag" id="aWinner"></span></h3>
+          <div class="big-number nominal">
+            <div class="eyebrow">Effective hourly rate</div>
+            <div class="value" id="aEff">—</div>
+          </div>
+          <ul class="result-lines">
+            <li><span class="k">Total compensation / year</span><span class="v" id="aTotal">—</span></li>
+            <li><span class="k">Pay per month</span><span class="v" id="aMonthly">—</span></li>
+            <li><span class="k">Headline hourly rate</span><span class="v" id="aNominal">—</span></li>
+            <li><span class="k">Working hours / year</span><span class="v" id="aWorking">—</span></li>
+            <li><span class="k">Scheduled hours / year</span><span class="v" id="aSched">—</span></li>
+          </ul>
+        </div>
+        <div class="offer-card">
+          <h3><span id="bTitle">Offer B</span><span class="winner-tag" id="bWinner"></span></h3>
+          <div class="big-number nominal">
+            <div class="eyebrow">Effective hourly rate</div>
+            <div class="value" id="bEff">—</div>
+          </div>
+          <ul class="result-lines">
+            <li><span class="k">Total compensation / year</span><span class="v" id="bTotal">—</span></li>
+            <li><span class="k">Pay per month</span><span class="v" id="bMonthly">—</span></li>
+            <li><span class="k">Headline hourly rate</span><span class="v" id="bNominal">—</span></li>
+            <li><span class="k">Working hours / year</span><span class="v" id="bWorking">—</span></li>
+            <li><span class="k">Scheduled hours / year</span><span class="v" id="bSched">—</span></li>
+          </ul>
+        </div>
+      </div>
+      <p id="cVerdict" style="font-weight:650;margin-top:18px;"></p>
+      <div class="warn-note">All figures are gross, before tax. To see what the winning offer pays after deductions, run its total compensation through the <a href="/take-home-pay">take-home pay calculator →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">working hours = hours per week × weeks per year − PTO days × (hours per week ÷ 5)</div>
+    <div class="formula">total compensation = salary + bonus + benefits − commute cost × 12</div>
+    <div class="formula">effective hourly rate = total compensation ÷ working hours</div>
+    <p>Example, with the defaults above: Offer A pays $60,000 for 40 hours a week with 10 PTO days — 2,000 working hours, so $30.00 an effective hour (its headline rate is only $28.85, because the headline divides by 2,080 scheduled hours and ignores the paid days off). Offer B pays $70,000 for 45 hours a week with 15 PTO days, a $5,000 bonus, $2,000 of benefits, and a $200 monthly commute — $74,600 total compensation over 2,205 working hours, so $33.83 an effective hour. Offer B wins on both measures here, but that is not guaranteed: an $80,000 offer at 40 hours a week ($38.46 an hour) loses on hourly rate to a $78,000 offer at 35 hours a week ($42.86 an hour), even though it pays $2,000 more a year. When the two verdicts split, the calculator says so — the choice is then time versus money, not a math error.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Why isn't the higher salary always the better offer?</summary>
+      <p>Salary alone ignores how many hours buy it. An $80,000 offer at 40 hours a week pays $38.46 an effective hour, while a $78,000 offer at 35 hours a week pays $42.86 — the lower salary is $4.40 an hour better, even though it pays $2,000 less a year. Add paid time off, bonuses, benefits, and commute cost, and the headline number moves even further.</p>
+    </details>
+    <details><summary>How are paid days off counted?</summary>
+      <p>Paid time off is paid, so it shrinks your working hours, not your pay. Working hours equal scheduled hours minus PTO days times hours per day (hours per week divided by 5). Example: 40 hours a week over 52 weeks is 2,080 scheduled hours; 10 PTO days remove 80 hours, leaving 2,000 working hours — so a $60,000 salary is $30.00 an effective hour, not $28.85.</p>
+    </details>
+    <details><summary>What counts as "other benefits"?</summary>
+      <p>Anything the employer pays on top of salary and bonus, priced per year: 401(k) match, stock or RSUs, and health-insurance premiums the employer covers. Enter the annual dollar value. If you cannot price a benefit, leave it at $0 rather than guessing — the comparison stays honest about what it does and does not include.</p>
+    </details>
+    <details><summary>Why subtract the commute cost?</summary>
+      <p>Commute cost comes out of the same pay, so an offer that costs $200 a month to reach is really $2,400 a year less. The calculator subtracts twelve months of commute cost from salary, bonus, and benefits to give total compensation. For the exact commute figure, use the <a href="/commute-cost">commute cost calculator</a>.</p>
+    </details>
+    <details><summary>What if one offer wins on total pay and the other on hourly rate?</summary>
+      <p>That split is real and the calculator shows both verdicts instead of picking one for you. The higher-total offer pays more money; the higher-hourly offer buys that money with fewer of your hours. Choosing between them is a time-versus-money decision, not a math error.</p>
+    </details>
+    <details><summary>Are these figures before or after tax?</summary>
+      <p>Before tax. All figures here are gross: total compensation and effective hourly rate are pre-tax. To see what each offer pays after deductions, run the winning total through the <a href="/take-home-pay">take-home pay calculator</a>.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free job offer comparison calculator. Figures are gross estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, the <a href="/hourly-to-salary">hourly to salary calculator</a>, the <a href="/paycheck">paycheck calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, and the <a href="/salary-raise">salary raise calculator</a>.</p>
+  </div>
+</footer>
+<script src="../offer.js"></script>
+</body>
+</html>
