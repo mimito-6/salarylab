@@ -78,6 +78,12 @@ body {
 }
 .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 560px) { .field-grid { grid-template-columns: 1fr; } }
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 640px) { .offer-grid { grid-template-columns: 1fr; } }
+.offer-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; background: var(--surface); }
+.offer-card h3 { margin: 0 0 12px; font-size: 1.1rem; }
+.winner-tag { display: inline-block; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 700; border-radius: 999px; padding: 2px 10px; margin-left: 8px; vertical-align: middle; }
+.winner-tag:empty { display: none; }
 .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
 button.btn {
   font: inherit; font-weight: 700; cursor: pointer;
