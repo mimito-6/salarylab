@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freelance Rate Calculator — What Hourly Rate Do I Need to Charge? | SalaryLab</title>
+<meta name="description" content="Free freelance rate calculator: enter the take-home pay you want, your business expenses, and your tax rate to find the hourly rate you must charge — plus the annual revenue that rate has to bring in.">
+<link rel="canonical" href="https://salary.mimito6.uk/freelance-rate">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Freelance Rate Calculator",
+  "url": "https://salary.mimito6.uk/freelance-rate",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate the hourly rate a freelancer must charge to reach a target take-home pay, after business expenses and tax, over a given number of billable hours."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is the rate higher than my target divided by my hours?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because the rate has to cover three things, not one: your take-home pay, your business expenses, and tax. Wanting $60,000 take-home over 1,440 billable hours is $41.67 an hour before anything is taken out — but with $5,000 of expenses and 25% tax, the rate you must actually charge is about $60.19 an hour. The $18.52 gap is not a markup; it is the tax and expenses, spread over your billable hours." }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as billable hours?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only the hours a client pays for. Admin, marketing, pitching, invoicing, and learning are real work, but nobody bills for them — so do not count them here. If you work 40 hours a week but only 30 are billable, enter 30. That is exactly why freelance rates look high next to salaried hourly pay: the rate has to carry the unpaid hours too." }
+    },
+    {
+      "@type": "Question",
+      "name": "What tax rate should I enter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your effective rate: total tax divided by total income, as a percentage. This tool uses a flat-rate approximation — real tax systems are progressive, so the flat rate is a planning shortcut, not a tax filing. If you know last year's effective rate, use that; if not, start with a rough figure and re-run the numbers with a higher rate to see the sensitivity." }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as business expenses?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Everything the work costs you in a year: software subscriptions, hardware, insurance, a home-office share of rent and utilities, phone, accounting, and similar costs. Add them up for the year and enter the total; zero is fine if you genuinely have none. Leaving expenses out understates the rate — $5,000 of expenses at 25% tax needs about $6,667 of extra revenue, not $5,000, because the extra revenue is taxed too." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I round my rate up?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The calculated rate is a floor, not a quote: charging exactly $60.19 an hour leaves no room for unpaid invoices, sick weeks, or a slow month. Round up to a clean number — $60, $65, or $75 — and treat the difference as your buffer. A rate that only just covers the target on a perfect year is a rate that misses the target in a normal one." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from the hourly to salary calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That tool converts a rate you already have into an annual salary. This one solves the reverse problem: you name the income you want to take home, and it works backwards to the rate you must charge, after expenses and tax. Use this one first to set your rate, and the hourly to salary calculator to check what a quoted rate is worth as a salary." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison">Job Offer</a>
+      <a href="/freelance-rate" aria-current="page">Freelance Rate</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Freelance Rate Calculator</h1>
+    <p class="lede">Your target income divided by your hours is not your rate — that number forgets tax, expenses, and every hour nobody pays for. Enter the take-home pay you want and the calculator works backwards to the hourly rate you actually have to charge.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your rate, worked backwards</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="fTarget">Target take-home pay per year</label>
+        <input id="fTarget" type="number" inputmode="decimal" min="0" step="any" value="60000">
+        <small>What you want left after tax and expenses — not your revenue.</small>
+      </div>
+      <div class="field">
+        <label for="fExpenses">Business expenses per year</label>
+        <input id="fExpenses" type="number" inputmode="decimal" min="0" step="any" value="5000">
+        <small>Software, hardware, insurance, home office, phone — the annual total. 0 is fine.</small>
+      </div>
+      <div class="field">
+        <label for="fTax">Effective tax rate (%)</label>
+        <input id="fTax" type="number" inputmode="decimal" min="0" max="99" step="any" value="25">
+        <small>Total tax ÷ total income, as a percentage. A flat-rate planning figure, not a filing.</small>
+      </div>
+      <div class="field">
+        <label for="fHours">Billable hours per week</label>
+        <input id="fHours" type="number" inputmode="decimal" min="0" step="any" value="30">
+        <small>Only hours a client pays for — not admin, pitching, or learning time.</small>
+      </div>
+      <div class="field">
+        <label for="fWeeks">Billable weeks per year</label>
+        <input id="fWeeks" type="number" inputmode="decimal" min="0" step="any" value="48">
+        <small>52 minus holidays and unpaid time off. Billable hours a year = hours per week × weeks per year.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcFreelanceBtn" type="button">What rate do I need?</button>
+    </div>
+    <p id="fError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="fResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Hourly rate you need to charge</div>
+        <div class="value" id="fBig">—</div>
+        <div class="delta" id="fBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Required hourly rate</span><span class="v" id="fRate">—</span></li>
+        <li><span class="k">Annual revenue needed</span><span class="v" id="fRevenue">—</span></li>
+        <li><span class="k">Monthly revenue needed</span><span class="v" id="fMonthly">—</span></li>
+        <li><span class="k">Weekly revenue needed</span><span class="v" id="fWeekly">—</span></li>
+        <li><span class="k">Billable hours per year</span><span class="v" id="fHoursYear">—</span></li>
+        <li><span class="k">Take-home pay per billable hour</span><span class="v" id="fTakeHomeHour">—</span></li>
+      </ul>
+      <div class="warn-note">The gap between the required rate and your take-home pay per billable hour is tax and expenses — not profit. All figures use a flat tax rate; to see the after-tax side of a salary instead, try the <a href="/take-home-pay">take-home pay calculator →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">annual revenue needed = (target take-home pay + business expenses) ÷ (1 − tax rate)</div>
+    <div class="formula">billable hours per year = billable hours per week × weeks per year</div>
+    <div class="formula">required hourly rate = annual revenue needed ÷ billable hours per year</div>
+    <div class="formula">take-home pay per billable hour = target take-home pay ÷ billable hours per year</div>
+    <p>Example: wanting $60,000 take-home, with $5,000 of expenses and 25% tax, over 30 billable hours a week for 48 weeks (1,440 hours a year). Annual revenue needed is ($60,000 + $5,000) ÷ 0.75 = $86,666.67, so the rate is $86,666.67 ÷ 1,440 = $60.19 an hour — while take-home pay per billable hour is only $60,000 ÷ 1,440 = $41.67. The $18.52 gap is tax and expenses, and it is why dividing your target by your hours always understates the rate. Two more checks: with no expenses and 0% tax, the rate equals take-home per hour ($80,000 over 2,080 hours = $38.46); and a $50,000 target with $10,000 expenses at 20% tax over 1,000 billable hours needs exactly $75.00 an hour.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Why is the rate higher than my target divided by my hours?</summary>
+      <p>Because the rate has to cover three things, not one: your take-home pay, your business expenses, and tax. Wanting $60,000 take-home over 1,440 billable hours is $41.67 an hour before anything is taken out — but with $5,000 of expenses and 25% tax, the rate you must actually charge is about $60.19 an hour. The $18.52 gap is not a markup; it is the tax and expenses, spread over your billable hours.</p>
+    </details>
+    <details><summary>What counts as billable hours?</summary>
+      <p>Only the hours a client pays for. Admin, marketing, pitching, invoicing, and learning are real work, but nobody bills for them — so do not count them here. If you work 40 hours a week but only 30 are billable, enter 30. That is exactly why freelance rates look high next to salaried hourly pay: the rate has to carry the unpaid hours too.</p>
+    </details>
+    <details><summary>What tax rate should I enter?</summary>
+      <p>Your effective rate: total tax divided by total income, as a percentage. This tool uses a flat-rate approximation — real tax systems are progressive, so the flat rate is a planning shortcut, not a tax filing. If you know last year's effective rate, use that; if not, start with a rough figure and re-run the numbers with a higher rate to see the sensitivity.</p>
+    </details>
+    <details><summary>What counts as business expenses?</summary>
+      <p>Everything the work costs you in a year: software subscriptions, hardware, insurance, a home-office share of rent and utilities, phone, accounting, and similar costs. Add them up for the year and enter the total; zero is fine if you genuinely have none. Leaving expenses out understates the rate — $5,000 of expenses at 25% tax needs about $6,667 of extra revenue, not $5,000, because the extra revenue is taxed too.</p>
+    </details>
+    <details><summary>Should I round my rate up?</summary>
+      <p>Yes. The calculated rate is a floor, not a quote: charging exactly $60.19 an hour leaves no room for unpaid invoices, sick weeks, or a slow month. Round up to a clean number — $60, $65, or $75 — and treat the difference as your buffer. A rate that only just covers the target on a perfect year is a rate that misses the target in a normal one.</p>
+    </details>
+    <details><summary>How is this different from the hourly to salary calculator?</summary>
+      <p>That tool converts a rate you already have into an annual salary. This one solves the reverse problem: you name the income you want to take home, and it works backwards to the rate you must charge, after expenses and tax. Use this one first to set your rate, and the <a href="/hourly-to-salary">hourly to salary calculator</a> to check what a quoted rate is worth as a salary.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free freelance rate calculator. Figures are gross estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, the <a href="/hourly-to-salary">hourly to salary calculator</a>, the <a href="/paycheck">paycheck calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, the <a href="/salary-raise">salary raise calculator</a>, and the <a href="/job-offer-comparison">job offer comparison calculator</a>.</p>
+  </div>
+</footer>
+<script src="../freelance.js"></script>
+</body>
+</html>
