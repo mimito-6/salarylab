@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inflation-Adjusted Salary Calculator — What Is My Salary Worth Over Time? | SalaryLab</title>
+<meta name="description" content="Free inflation-adjusted salary calculator: enter your salary, the number of years, and the average inflation rate to find what that salary is worth in today's dollars — or what you will need to earn in the future to keep the same purchasing power.">
+<link rel="canonical" href="https://salary.mimito6.uk/inflation-adjusted-salary">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Inflation-Adjusted Salary Calculator",
+  "url": "https://salary.mimito6.uk/inflation-adjusted-salary",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Adjust a salary for inflation over any number of years, at any average inflation rate, and see the equivalent salary in today's or future dollars."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What inflation rate should I use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "There is no single right number — it depends on the country and the years. In the United States, consumer prices have averaged roughly 2–3% a year over recent decades, and the Federal Reserve targets 2%. Use your country's actual average for the period you care about, and run a second scenario at a higher rate to see how sensitive the answer is: at 3%, a $50,000 salary needs $67,195.82 after ten years; at 5%, it needs $81,444.73." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why compound instead of just multiplying the rate by the years?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because each year's price increase applies to prices that already rose the year before. Simple multiplication says 3% a year for ten years is 30%, or $50,000 × 1.30 = $65,000. Compounding gives (1.03)^10 = 1.3439, or $67,195.82 — the $2,195.82 gap is the interest on the interest, and it grows with every extra year." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this include pay raises?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator prices the same purchasing power, not your career. If your salary grew faster than inflation over the period, you gained real pay; if it grew slower, you lost real pay even though the number went up. Compare your actual salary path against the equivalent salary to see the real change." }
+    },
+    {
+      "@type": "Question",
+      "name": "What about deflation, when prices fall?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The same formula works with a negative rate: a $50,000 salary ten years ago at −1% a year needs only $45,219.10 today to buy the same basket, because prices fell about 9.6% over the decade. This calculator accepts rates down to −5%." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the equivalent salary what I should ask for in a negotiation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is the floor, not the target. The equivalent salary leaves you exactly where you were — anything above it is a real raise, anything below it is a real pay cut even if the headline number went up. A raise that only matches inflation is a cost-of-living adjustment, not a promotion." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from the cost of living salary calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That tool translates a salary across cities at the same moment — same job, same life, different prices. This one translates a salary across time in the same city — same job, same life, later prices. Use this one to check whether your pay kept up with inflation, and the cost of living calculator to check what the same pay is worth somewhere else." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison">Job Offer</a>
+      <a href="/freelance-rate">Freelance Rate</a>
+      <a href="/cost-of-living-salary">Cost of Living</a>
+      <a href="/inflation-adjusted-salary" aria-current="page">Inflation-Adjusted</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Inflation-Adjusted Salary Calculator</h1>
+    <p class="lede">A $50,000 salary ten years ago is not a $50,000 salary today — at 3% average inflation it takes $67,195.82 to buy the same life. Enter a salary, a number of years, and an inflation rate to see what it is worth in today's dollars, or what you will need to earn in the future to keep pace.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your salary, adjusted for inflation</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label>Which direction?</label>
+        <label style="font-weight:400;"><input type="radio" name="iMode" value="past" checked> A salary from N years ago → what it is worth today</label>
+        <label style="font-weight:400;"><input type="radio" name="iMode" value="future"> My salary today → what I will need in N years</label>
+      </div>
+      <div class="field">
+        <label for="iSalary">Annual salary</label>
+        <input id="iSalary" type="number" inputmode="decimal" min="0" step="any" value="50000">
+        <small>Gross salary, in the starting year's dollars.</small>
+      </div>
+      <div class="field">
+        <label for="iYears">Number of years</label>
+        <input id="iYears" type="number" inputmode="decimal" min="0" step="any" value="10">
+        <small>How far back — or how far ahead — to adjust. Up to 50 years.</small>
+      </div>
+      <div class="field">
+        <label for="iRate">Average annual inflation rate (%)</label>
+        <input id="iRate" type="number" inputmode="decimal" min="-5" max="20" step="any" value="3">
+        <small>One flat average for the whole period. U.S. consumer prices have averaged roughly 2–3% a year over recent decades.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcInflationBtn" type="button">Adjust my salary for inflation</button>
+    </div>
+    <p id="iError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="iResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow" id="iEyebrow">Salary needed today to match it</div>
+        <div class="value" id="iBig">—</div>
+        <div class="delta" id="iBigDelta"></div>
+      </div>
+      <ul class="result-lines">
+        <li><span class="k">Equivalent salary (per year)</span><span class="v" id="iEquivalent">—</span></li>
+        <li><span class="k">Difference vs original salary</span><span class="v" id="iDifference">—</span></li>
+        <li><span class="k">Cumulative price change</span><span class="v" id="iPct">—</span></li>
+        <li><span class="k">Equivalent salary (per month)</span><span class="v" id="iMonthlyNew">—</span></li>
+        <li><span class="k">Original salary (per month)</span><span class="v" id="iMonthlyCurrent">—</span></li>
+        <li><span class="k" id="iBuysLabel">Your $50,000 today buys what this bought 10 years ago</span><span class="v" id="iBuys">—</span></li>
+        <li><span class="k">Price multiplier over the period</span><span class="v" id="iFactor">—</span></li>
+      </ul>
+      <div class="warn-note">A flat average rate is a simplification — real inflation varies year to year, and your own spending basket may rise faster or slower than the average. All figures are gross salary; taxes are not included. To translate the adjusted salary to another city, try the <a href="/cost-of-living-salary">cost of living salary calculator →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">price factor = (1 + inflation rate) ^ years</div>
+    <div class="formula">equivalent salary = salary × price factor</div>
+    <div class="formula">difference = equivalent salary − salary</div>
+    <div class="formula">cumulative price change (%) = (price factor − 1) × 100</div>
+    <div class="formula">what your salary buys then = salary ÷ price factor</div>
+    <p>Example: $50,000 ten years ago at 3% average inflation. The price factor is (1.03)^10 = 1.3439, so the equivalent salary today is $50,000 × 1.3439 = $67,195.82 — $17,195.82 more, or +34.39%, which is $5,599.65 a month against $4,166.67 then. And $50,000 today buys what $37,204.70 bought ten years ago ($50,000 ÷ 1.3439). Looking forward works the same way: $80,000 today, five years at 2.5%, needs $90,512.66 to keep the same purchasing power. Over longer horizons the compounding bites harder — $60,000 twenty years ago at 3% needs $108,366.67 today — which is why the rule of 72 is a handy check: at 3% inflation, prices roughly double every 24 years (72 ÷ 3), and (1.03)^24 = 2.03 confirms it.</p>
+    <p>How fast a $50,000 salary has to grow to stand still, at 3% average inflation:</p>
+    <ul>
+      <li>After 1 year: $51,500.00</li>
+      <li>After 5 years: $57,963.70</li>
+      <li>After 10 years: $67,195.82</li>
+      <li>After 15 years: $77,898.37</li>
+      <li>After 20 years: $90,305.56</li>
+      <li>After 25 years: $104,688.90</li>
+      <li>After 30 years: $121,363.12</li>
+    </ul>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>What inflation rate should I use?</summary>
+      <p>There is no single right number — it depends on the country and the years. In the United States, consumer prices have averaged roughly 2–3% a year over recent decades, and the Federal Reserve targets 2%. Use your country's actual average for the period you care about, and run a second scenario at a higher rate to see how sensitive the answer is: at 3%, a $50,000 salary needs $67,195.82 after ten years; at 5%, it needs $81,444.73.</p>
+    </details>
+    <details><summary>Why compound instead of just multiplying the rate by the years?</summary>
+      <p>Because each year's price increase applies to prices that already rose the year before. Simple multiplication says 3% a year for ten years is 30%, or $50,000 × 1.30 = $65,000. Compounding gives (1.03)^10 = 1.3439, or $67,195.82 — the $2,195.82 gap is the interest on the interest, and it grows with every extra year.</p>
+    </details>
+    <details><summary>Does this include pay raises?</summary>
+      <p>No. This calculator prices the same purchasing power, not your career. If your salary grew faster than inflation over the period, you gained real pay; if it grew slower, you lost real pay even though the number went up. Compare your actual salary path against the equivalent salary to see the real change.</p>
+    </details>
+    <details><summary>What about deflation, when prices fall?</summary>
+      <p>The same formula works with a negative rate: a $50,000 salary ten years ago at −1% a year needs only $45,219.10 today to buy the same basket, because prices fell about 9.6% over the decade. This calculator accepts rates down to −5%.</p>
+    </details>
+    <details><summary>Is the equivalent salary what I should ask for in a negotiation?</summary>
+      <p>It is the floor, not the target. The equivalent salary leaves you exactly where you were — anything above it is a real raise, anything below it is a real pay cut even if the headline number went up. A raise that only matches inflation is a cost-of-living adjustment, not a promotion.</p>
+    </details>
+    <details><summary>How is this different from the cost of living salary calculator?</summary>
+      <p>That tool translates a salary across cities at the same moment — same job, same life, different prices. This one translates a salary across time in the same city — same job, same life, later prices. Use this one to check whether your pay kept up with inflation, and the <a href="/cost-of-living-salary">cost of living calculator</a> to check what the same pay is worth somewhere else.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free inflation-adjusted salary calculator. Figures are gross estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/commute-cost">commute cost calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, the <a href="/hourly-to-salary">hourly to salary calculator</a>, the <a href="/paycheck">paycheck calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, the <a href="/salary-raise">salary raise calculator</a>, the <a href="/job-offer-comparison">job offer comparison calculator</a>, the <a href="/freelance-rate">freelance rate calculator</a>, and the <a href="/cost-of-living-salary">cost of living salary calculator</a>.</p>
+  </div>
+</footer>
+<script src="../inflation.js"></script>
+</body>
+</html>
