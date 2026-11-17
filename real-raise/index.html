@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Raise Calculator — Is Your Raise a Real Raise After Inflation? | SalaryLab</title>
+<meta name="description" content="Free real raise calculator: enter your salary, your nominal raise, and inflation to see what your raise is really worth — your new salary in today's dollars, your real raise percentage, and whether you got a real raise or a real pay cut.">
+<link rel="canonical" href="https://salary.mimito6.uk/real-raise">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Real Raise Calculator",
+  "url": "https://salary.mimito6.uk/real-raise",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compare a nominal salary raise against inflation: new salary in today's dollars, real raise percentage, and the break-even raise that just keeps pace with prices."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why isn't the real raise just the raise minus inflation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because the two percentages apply to different bases. The exact real raise is (1 + raise) / (1 + inflation) - 1. A 5% raise with 3% inflation is 1.05 / 1.03 - 1 = 1.94%, not 2%. Subtracting is a close approximation only when both numbers are small — at 20% raise and 15% inflation it gives 5% while the true figure is 4.35%." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does \"in today's dollars\" mean?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is the new salary restated at today's prices: new salary divided by one plus inflation. A $63,000 salary after 3% inflation is worth $61,165.05 in today's dollars — it buys what $61,165.05 buys today. The $1,834.95 gap is the part inflation ate." }
+    },
+    {
+      "@type": "Question",
+      "name": "My raise is below inflation — did I get a pay cut?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In purchasing power, yes. A 2% raise with 3.5% inflation on $80,000 takes you to $81,600, but that is only $78,840.58 in today's dollars — a real pay cut of 1.45%, or $1,159.42 a year of buying power. The number on the paycheck went up; what it buys went down." }
+    },
+    {
+      "@type": "Question",
+      "name": "What raise do I need just to keep pace with inflation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Exactly the inflation rate. At 3% inflation, a 3% raise is break-even: $60,000 becomes $61,800, which buys exactly what $60,000 bought before. Anything below 3% is a real pay cut; anything above is a real raise." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures before or after tax?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Before tax. All figures here are gross. Inflation shrinks purchasing power before tax even enters the picture; to see what the new salary pays after deductions, run it through the take-home pay calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for a raise over several years?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This page prices one raise against one year's inflation. For a salary compared across several years, use the inflation-adjusted salary calculator, which compounds inflation year by year." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison">Job Offer</a>
+      <a href="/freelance-rate">Freelance Rate</a>
+      <a href="/cost-of-living-salary">Cost of Living</a>
+      <a href="/inflation-adjusted-salary">Inflation-Adjusted</a>
+      <a href="/real-raise" aria-current="page">Real Raise</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Real Raise Calculator</h1>
+    <p class="lede">A 5% raise sounds like a win — until prices rose 3%. Enter your current salary, your nominal raise, and inflation, and see what the raise is really worth: your new salary in today's dollars, your real raise percentage, and whether you got a real raise or a real pay cut.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your raise, after inflation</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="rrCurrent">Current annual salary</label>
+        <input id="rrCurrent" type="number" inputmode="decimal" min="0" step="any" value="60000">
+        <small>Gross, before tax. From the <a href="/hourly-to-salary">hourly to salary calculator</a> if you start from an hourly wage.</small>
+      </div>
+      <div class="field">
+        <label for="rrRaise">Nominal raise (%)</label>
+        <input id="rrRaise" type="number" inputmode="decimal" min="0" step="any" value="5">
+        <small>The percentage in your offer or review. 0% is valid — it just means no change.</small>
+      </div>
+      <div class="field">
+        <label for="rrInfl">Inflation rate (%)</label>
+        <input id="rrInfl" type="number" inputmode="decimal" step="any" value="3">
+        <small>Price growth over the same year — CPI is the usual source. Negative for deflation.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcRealBtn" type="button">Calculate my real raise</button>
+    </div>
+    <p id="rrError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="rrResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Your new salary, in today's dollars</div>
+        <div class="value" id="rrBig">—</div>
+        <div class="delta" id="rrBigDelta"></div>
+      </div>
+      <p id="rrVerdict" style="font-weight:700;"></p>
+      <ul class="result-lines">
+        <li><span class="k">New salary, in today's dollars</span><span class="v" id="rrRealSalary">—</span></li>
+        <li><span class="k">Real raise</span><span class="v" id="rrRealRaise">—</span></li>
+        <li><span class="k">Purchasing power gained / lost</span><span class="v" id="rrPpGain">—</span></li>
+        <li><span class="k">New nominal salary</span><span class="v" id="rrNewNominal">—</span></li>
+        <li><span class="k">Salary needed just to keep pace</span><span class="v" id="rrStandStill">—</span></li>
+        <li><span class="k">Break-even raise (equals inflation)</span><span class="v" id="rrBreakEven">—</span></li>
+        <li><span class="k">Nominal surplus over keeping pace</span><span class="v" id="rrNominalSurplus">—</span></li>
+        <li><span class="k">New monthly salary</span><span class="v" id="rrNewMonthly">—</span></li>
+        <li><span class="k">New monthly salary, in today's dollars</span><span class="v" id="rrRealMonthly">—</span></li>
+        <li><span class="k">Current monthly salary</span><span class="v" id="rrCurrentMonthly">—</span></li>
+      </ul>
+      <div class="warn-note">All figures are gross, before tax. To see what the new salary pays after deductions, try the <a href="/take-home-pay">take-home pay calculator →</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Reverse lookup: what nominal raise buys a real raise?</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="tReal">Target real raise (%)</label>
+        <input id="tReal" type="number" inputmode="decimal" min="0" step="any" value="2">
+        <small>How much more buying power you want — not the number on the paycheck. Uses the salary and inflation from the calculator above.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calcTargetBtn" type="button">What raise do I need?</button>
+    </div>
+    <p id="tError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+    <div class="results" id="tResults" aria-live="polite">
+      <ul class="result-lines">
+        <li><span class="k">Nominal raise needed</span><span class="v" id="tNeeded">—</span></li>
+        <li><span class="k">New nominal salary</span><span class="v" id="tNewNominal">—</span></li>
+        <li><span class="k">Annual gap from today</span><span class="v" id="tAnnualGap">—</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">new nominal salary = current salary × (1 + raise % ÷ 100)</div>
+    <div class="formula">salary that keeps pace = current salary × (1 + inflation % ÷ 100)</div>
+    <div class="formula">new salary in today's dollars = new nominal salary ÷ (1 + inflation % ÷ 100)</div>
+    <div class="formula">real raise % = (1 + raise % ÷ 100) ÷ (1 + inflation % ÷ 100) − 1</div>
+    <div class="formula">nominal raise for a target real raise = (1 + real target % ÷ 100) × (1 + inflation % ÷ 100) − 1</div>
+    <p>Example: $60,000 with a 5% raise and 3% inflation becomes $63,000 nominal — but $63,000 ÷ 1.03 = $61,165.05 in today's dollars, a real raise of 1.94%, or $1,165.05 a year of extra buying power. Inflation ate $1,800 of the $3,000 raise (the salary needed just to keep pace is $61,800), leaving a $1,200 nominal surplus. The subtraction shortcut — 5% minus 3% is 2% — is close here but wrong: the exact figure is 1.94%, because the raise and the inflation apply to different bases. The gap widens when the numbers get bigger: a 20% raise against 15% inflation is 4.35% real, not 5%.</p>
+    <p>And a raise below inflation is a pay cut in disguise: $80,000 with a 2% raise at 3.5% inflation becomes $81,600, but only $78,840.58 in today's dollars — a real cut of 1.45%, or $1,159.42 a year of buying power gone. A 0% raise at 4% inflation is worse still: $50,000 becomes $48,076.92 in today's dollars, a 3.85% real cut. The break-even line is simple: your nominal raise must equal inflation to stand still.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Why isn't the real raise just the raise minus inflation?</summary>
+      <p>Because the two percentages apply to different bases. The exact real raise is (1 + raise) ÷ (1 + inflation) − 1. A 5% raise with 3% inflation is 1.05 ÷ 1.03 − 1 = 1.94%, not 2%. Subtracting is a close approximation only when both numbers are small — at 20% raise and 15% inflation it gives 5% while the true figure is 4.35%.</p>
+    </details>
+    <details><summary>What does "in today's dollars" mean?</summary>
+      <p>It is the new salary restated at today's prices: new salary divided by one plus inflation. A $63,000 salary after 3% inflation is worth $61,165.05 in today's dollars — it buys what $61,165.05 buys today. The $1,834.95 gap is the part inflation ate.</p>
+    </details>
+    <details><summary>My raise is below inflation — did I get a pay cut?</summary>
+      <p>In purchasing power, yes. A 2% raise with 3.5% inflation on $80,000 takes you to $81,600, but that is only $78,840.58 in today's dollars — a real pay cut of 1.45%, or $1,159.42 a year of buying power. The number on the paycheck went up; what it buys went down.</p>
+    </details>
+    <details><summary>What raise do I need just to keep pace with inflation?</summary>
+      <p>Exactly the inflation rate. At 3% inflation, a 3% raise is break-even: $60,000 becomes $61,800, which buys exactly what $60,000 bought before. Anything below 3% is a real pay cut; anything above is a real raise.</p>
+    </details>
+    <details><summary>Are these figures before or after tax?</summary>
+      <p>Before tax. All figures here are gross. Inflation shrinks purchasing power before tax even enters the picture; to see what the new salary pays after deductions, run it through the take-home pay calculator.</p>
+    </details>
+    <details><summary>Can I use this for a raise over several years?</summary>
+      <p>This page prices one raise against one year's inflation. For a salary compared across several years, use the inflation-adjusted salary calculator, which compounds inflation year by year.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free real raise calculator. Figures are gross estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/salary-raise">salary raise calculator</a>, the <a href="/inflation-adjusted-salary">inflation-adjusted salary calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, the <a href="/overtime-pay">overtime pay calculator</a>, and the <a href="/paycheck">paycheck calculator</a>.</p>
+  </div>
+</footer>
+<script src="../realraise.js"></script>
+</body>
+</html>
