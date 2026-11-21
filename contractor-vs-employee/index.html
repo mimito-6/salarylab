@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contractor vs Employee Calculator — Which Offer Pays More Per Hour? | SalaryLab</title>
+<meta name="description" content="Free contractor vs employee calculator: compare a W-2 employee offer against a contractor or freelance offer by effective hourly rate and total pay — including self-employment tax, benefits, and paid time off — and find the break-even contractor rate.">
+<link rel="canonical" href="https://salary.mimito6.uk/contractor-vs-employee">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — Contractor vs Employee Calculator",
+  "url": "https://salary.mimito6.uk/contractor-vs-employee",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compare an employee offer against a contractor offer by effective hourly rate and total pay, including self-employment tax, benefits, and paid time off, and find the break-even contractor rate."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why compare effective hourly rates instead of just the salaries?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because the headline numbers are not measured in the same units. A $80,000 salary with $12,000 of benefits and 15 paid days off is $92,000 for 1,960 working hours — $46.94 an hour. A $60-an-hour contractor rate is $115,200 gross for 1,920 billable hours, but $16,277.24 of that is self-employment tax, leaving $98,922.76, or $51.52 an hour. Comparing $80,000 to $60 an hour directly tells you nothing; the effective hourly rates do." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these figures before or after income tax?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Before income tax. This page compares gross compensation only: employee salary plus benefits against contractor gross minus self-employment tax. Income tax is not modelled, because the two sides pay it differently — the employee has tax withheld, the contractor pays estimated tax and can deduct business expenses. To see what a salary pays after deductions, use the take-home pay calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 92.35% in the self-employment tax?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A US rule: only 92.35% of a contractor's net earnings are subject to self-employment tax. The tax itself is 15.3% — 12.4% Social Security plus 2.9% Medicare — so the effective rate on gross is 0.9235 x 15.3% = 14.13%. On $115,200 of gross that is $16,277.24. This is an approximation of the US rule, not tax advice, and the rate is editable if your situation differs." }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I put in for benefits value?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Whatever the employer pays on your behalf, in dollars per year: health insurance premiums, retirement match, life insurance, and similar. Ask HR for the total if you can. If you do not know the value, enter $0 — then read the result as a salary-only comparison, and remember the employee side is understated by exactly the benefits you left out." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can the per-hour winner and the total winner be different?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because hours differ. A contractor at $60 an hour who bills 30 hours a week for 40 weeks still earns $51.52 an hour after self-employment tax — more than the employee's $46.94 — but only $61,826.72 for the year, well under the employee's $92,000. The per-hour winner is the better rate; the total winner is the bigger paycheck. When they split, it is a time-vs-money choice, not a clear winner." }
+    },
+    {
+      "@type": "Question",
+      "name": "What doesn't this calculator capture?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Three things the numbers cannot see. First, the employee gets paid sick leave, unemployment protection, and an employer safety net; the contractor gets none of that. Second, unpaid non-billable time — admin, finding clients, invoicing — is not in billable hours, so if you spend 10 hours a week on it, enter fewer billable hours. Third, contractor income varies: billable hours are a plan, not a guarantee, while the employee salary is fixed." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison">Job Offer</a>
+      <a href="/freelance-rate">Freelance Rate</a>
+      <a href="/cost-of-living-salary">Cost of Living</a>
+      <a href="/inflation-adjusted-salary">Inflation-Adjusted</a>
+      <a href="/real-raise">Real Raise</a>
+      <a href="/contractor-vs-employee" aria-current="page">Contractor vs Employee</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Contractor vs Employee Calculator</h1>
+    <p class="lede">An $80,000 salary and a $60-an-hour contract look incomparable — they are not, once you price benefits, paid time off, and self-employment tax. Enter both offers and compare them by effective hourly rate and total pay, and find the contractor rate that exactly matches the employee package.</p>
+  </div>
+
+  <div class="card">
+    <h2>Two offers, across the employment line</h2>
+    <p class="hint">All figures are gross, before income tax. Leave benefits at $0 if you do not know the value — the comparison stays honest about what it includes.</p>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <h3>Employee offer (W-2)</h3>
+        <div class="field">
+          <label for="ceSalary">Annual salary</label>
+          <input id="ceSalary" type="number" inputmode="decimal" min="0" step="any" value="80000">
+          <small>Gross, before tax.</small>
+        </div>
+        <div class="field">
+          <label for="ceBenefits">Annual benefits value</label>
+          <input id="ceBenefits" type="number" inputmode="decimal" min="0" step="any" value="12000">
+          <small>Employer-paid health insurance, retirement match, and similar — dollars per year. Enter $0 if you do not know it.</small>
+        </div>
+        <div class="field">
+          <label for="ceEmpHours">Hours per week</label>
+          <input id="ceEmpHours" type="number" inputmode="decimal" min="0" step="any" value="40">
+          <small>Usual working hours, not counting paid time off.</small>
+        </div>
+        <div class="field">
+          <label for="cePto">Paid time off (days / year)</label>
+          <input id="cePto" type="number" inputmode="decimal" min="0" step="any" value="15">
+          <small>Paid days off shrink working hours, not pay — 15 days is 3 weeks off.</small>
+        </div>
+      </div>
+      <div class="offer-card">
+        <h3>Contractor offer (1099 / freelance)</h3>
+        <div class="field">
+          <label for="ceRate">Hourly rate</label>
+          <input id="ceRate" type="number" inputmode="decimal" min="0" step="any" value="60">
+          <small>What the client pays per billable hour.</small>
+        </div>
+        <div class="field">
+          <label for="ceBillHours">Billable hours per week</label>
+          <input id="ceBillHours" type="number" inputmode="decimal" min="0" step="any" value="40">
+          <small>Hours you actually bill — not admin, not finding clients.</small>
+        </div>
+        <div class="field">
+          <label for="ceBillWeeks">Billable weeks per year</label>
+          <input id="ceBillWeeks" type="number" inputmode="decimal" min="0" step="any" value="48">
+          <small>48 weeks leaves 4 weeks unpaid — no paid time off as a contractor.</small>
+        </div>
+        <div class="field">
+          <label for="ceSeRate">Self-employment tax rate (%)</label>
+          <input id="ceSeRate" type="number" inputmode="decimal" min="0" step="any" value="15.3">
+          <small>US default 15.3% (12.4% Social Security + 2.9% Medicare). Only 92.35% of earnings are taxed, so the effective rate on gross is 14.13%. Enter 0% if it is already accounted for.</small>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="ceCalcBtn" type="button">Compare the offers</button>
+    </div>
+    <p id="ceError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="ceResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Break-even contractor rate</div>
+        <div class="value" id="ceBig">—</div>
+        <div class="delta" id="ceBigDelta"></div>
+      </div>
+      <p id="ceVerdict" style="font-weight:700;"></p>
+      <p id="ceVerdictTotal" style="font-weight:700;"></p>
+      <ul class="result-lines">
+        <li><span class="k">Per-hour winner</span><span class="v" id="ceHourWinner">—</span></li>
+        <li><span class="k">Total pay winner</span><span class="v" id="ceTotalWinner">—</span></li>
+        <li><span class="k">Employee total compensation</span><span class="v" id="ceEmpTotal">—</span></li>
+        <li><span class="k">Employee working hours / year</span><span class="v" id="ceEmpHoursYear">—</span></li>
+        <li><span class="k">Employee effective hourly rate</span><span class="v" id="ceEmpEff">—</span></li>
+        <li><span class="k">Contractor gross annual</span><span class="v" id="ceConGross">—</span></li>
+        <li><span class="k">Self-employment tax</span><span class="v" id="ceSeTax">—</span></li>
+        <li><span class="k">Contractor net after SE tax</span><span class="v" id="ceConNet">—</span></li>
+        <li><span class="k">Contractor billable hours / year</span><span class="v" id="ceConHours">—</span></li>
+        <li><span class="k">Contractor effective hourly rate</span><span class="v" id="ceConEff">—</span></li>
+        <li><span class="k">Break-even contractor rate</span><span class="v" id="ceBreakEven">—</span></li>
+      </ul>
+      <div class="warn-note">All figures are gross compensation, before income tax. The contractor has no paid sick leave and no employer safety net — the numbers do not capture that risk. To see what a salary pays after deductions, try the <a href="/take-home-pay">take-home pay calculator →</a></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">employee working hours = weekly hours × (52 − PTO days ÷ 5)</div>
+    <div class="formula">employee total compensation = salary + benefits</div>
+    <div class="formula">employee effective hourly rate = total compensation ÷ working hours</div>
+    <div class="formula">contractor gross = hourly rate × billable hours per week × billable weeks</div>
+    <div class="formula">self-employment tax = gross × 0.9235 × SE rate</div>
+    <div class="formula">contractor net = gross − self-employment tax</div>
+    <div class="formula">contractor effective hourly rate = net ÷ billable hours</div>
+    <div class="formula">break-even contractor rate = employee total compensation ÷ (1 − 0.9235 × SE rate) ÷ billable hours</div>
+    <p>Worked example: an $80,000 salary plus $12,000 of benefits is $92,000 of total compensation. With 15 paid days off — 3 weeks — a 40-hour week means 40 × 49 = 1,960 working hours, so the employee's effective rate is $92,000 ÷ 1,960 = $46.94 an hour. The contractor at $60 an hour, 40 billable hours a week for 48 weeks, grosses $115,200; self-employment tax is $115,200 × 0.9235 × 15.3% = $16,277.24, leaving $98,922.76 net, or $51.52 an hour over 1,920 billable hours. Here the contractor wins both ways — $51.52 vs $46.94 an hour, and $98,922.76 vs $92,000 for the year. The break-even rate is $92,000 ÷ 0.8587 ÷ 1,920 = $55.80 an hour: below that, the employee package pays more; above it, contracting does.</p>
+    <p>The two winners can split. Take the same contractor at 30 billable hours a week for 40 weeks: the gross falls to $72,000 and the net to $61,826.72, but the effective rate is still $51.52 an hour — the rate after self-employment tax does not depend on hours. So the contractor still wins per hour ($51.52 vs $46.94) while the employee wins in total ($92,000 vs $61,826.72), and the break-even rate jumps to $89.28 an hour. That split is the honest answer: a higher rate is not a higher paycheck unless the hours are there too.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Why compare effective hourly rates instead of just the salaries?</summary>
+      <p>Because the headline numbers are not measured in the same units. A $80,000 salary with $12,000 of benefits and 15 paid days off is $92,000 for 1,960 working hours — $46.94 an hour. A $60-an-hour contractor rate is $115,200 gross for 1,920 billable hours, but $16,277.24 of that is self-employment tax, leaving $98,922.76, or $51.52 an hour. Comparing $80,000 to $60 an hour directly tells you nothing; the effective hourly rates do.</p>
+    </details>
+    <details><summary>Are these figures before or after income tax?</summary>
+      <p>Before income tax. This page compares gross compensation only: employee salary plus benefits against contractor gross minus self-employment tax. Income tax is not modelled, because the two sides pay it differently — the employee has tax withheld, the contractor pays estimated tax and can deduct business expenses. To see what a salary pays after deductions, use the take-home pay calculator.</p>
+    </details>
+    <details><summary>What is the 92.35% in the self-employment tax?</summary>
+      <p>A US rule: only 92.35% of a contractor's net earnings are subject to self-employment tax. The tax itself is 15.3% — 12.4% Social Security plus 2.9% Medicare — so the effective rate on gross is 0.9235 × 15.3% = 14.13%. On $115,200 of gross that is $16,277.24. This is an approximation of the US rule, not tax advice, and the rate is editable if your situation differs.</p>
+    </details>
+    <details><summary>What should I put in for benefits value?</summary>
+      <p>Whatever the employer pays on your behalf, in dollars per year: health insurance premiums, retirement match, life insurance, and similar. Ask HR for the total if you can. If you do not know the value, enter $0 — then read the result as a salary-only comparison, and remember the employee side is understated by exactly the benefits you left out.</p>
+    </details>
+    <details><summary>Why can the per-hour winner and the total winner be different?</summary>
+      <p>Because hours differ. A contractor at $60 an hour who bills 30 hours a week for 40 weeks still earns $51.52 an hour after self-employment tax — more than the employee's $46.94 — but only $61,826.72 for the year, well under the employee's $92,000. The per-hour winner is the better rate; the total winner is the bigger paycheck. When they split, it is a time-vs-money choice, not a clear winner.</p>
+    </details>
+    <details><summary>What doesn't this calculator capture?</summary>
+      <p>Three things the numbers cannot see. First, the employee gets paid sick leave, unemployment protection, and an employer safety net; the contractor gets none of that. Second, unpaid non-billable time — admin, finding clients, invoicing — is not in billable hours, so if you spend 10 hours a week on it, enter fewer billable hours. Third, contractor income varies: billable hours are a plan, not a guarantee, while the employee salary is fixed.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free contractor vs employee calculator. Figures are gross estimates, not financial or tax advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/freelance-rate">freelance rate calculator</a>, the <a href="/job-offer-comparison">job offer comparison calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, and the <a href="/hourly-to-salary">hourly to salary calculator</a>.</p>
+  </div>
+</footer>
+<script src="../contractor.js"></script>
+</body>
+</html>
