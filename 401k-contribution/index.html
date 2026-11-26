@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>401(k) Contribution Calculator — Match, Limits & Growth | SalaryLab</title>
+<meta name="description" content="Free 401(k) contribution calculator: enter your salary, contribution rate, and employer match to see your annual contribution, the free match money, how much match you are leaving on the table, and what it grows to by retirement.">
+<link rel="canonical" href="https://salary.mimito6.uk/401k-contribution">
+<link rel="stylesheet" href="../styles.css">
+<meta name="theme-color" content="#0e7c6b">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SalaryLab — 401(k) Contribution Calculator",
+  "url": "https://salary.mimito6.uk/401k-contribution",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Calculate your 401(k) contribution, employer match, missed match, and projected growth to retirement — with the 2026 IRS contribution limit applied."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does \"50% match up to 6%\" actually mean?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your employer adds 50 cents for every dollar you contribute, but only on the first 6% of your salary. On an $80,000 salary, contributing 6% ($4,800) earns the full $2,400 match. Contributing 10% ($6,000) still earns only $2,400 — the match stops at 6% of salary. Contributing 3% ($2,400) earns only $1,200, leaving $1,200 of free match on the table." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the employer match count toward my $24,500 limit?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The 2026 IRS limit of $24,500 caps only what you put in from your own paycheck. The employer match sits on top of it. The combined ceiling from all sources is $72,000 a year, but a match alone can never push you over it — the match is at most your own (capped) contribution, so the combined total tops out at $49,000 in this calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my contribution rate would put in more than $24,500?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The calculator caps your contribution at $24,500 and says so. A 10% rate on a $300,000 salary would be $30,000, so only $24,500 goes in and the match is calculated on the capped amount. If you are 50 or older, the catch-up lets you add $8,000 more ($32,500 total); at ages 60–63 the higher catch-up is $11,250 ($35,750 total). This tool uses the under-50 limit." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the employer match really free money?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — a 50% match is an instant 50% return on the matched dollars, before any investment growth. The one catch is vesting: many plans only let you keep the full match after a few years with the company, so if you leave early you may forfeit part of it. Your own contributions are always 100% yours. Check your plan's vesting schedule." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the projection assume end-of-year contributions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is a deliberate, conservative simplification: each year's contribution is assumed to land at year end, so it earns no return in the year it is made. Real paycheck contributions go in every pay period and earn a little more — monthly deposits over 30 years at 7% would add roughly 7–8% to the total. The projection also assumes a flat return every year; real markets vary." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I contribute enough to get the full match before anything else?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For most people, yes — the match is the highest guaranteed return available anywhere, and turning it down is leaving part of your pay on the table. This tool only does the math; it is not financial advice. High-interest debt and an emergency fund are the usual competing priorities, and your plan administrator can confirm your exact match formula." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Salary<span>Lab</span></a>
+    <nav class="site-nav">
+      <a href="/">Hourly Wage</a>
+      <a href="/commute-cost">Commute Cost</a>
+      <a href="/overtime-pay">Overtime Pay</a>
+      <a href="/hourly-to-salary">Hourly to Salary</a>
+      <a href="/paycheck">Paycheck</a>
+      <a href="/take-home-pay">Take-Home Pay</a>
+      <a href="/salary-raise">Salary Raise</a>
+      <a href="/job-offer-comparison">Job Offer</a>
+      <a href="/freelance-rate">Freelance Rate</a>
+      <a href="/cost-of-living-salary">Cost of Living</a>
+      <a href="/inflation-adjusted-salary">Inflation-Adjusted</a>
+      <a href="/real-raise">Real Raise</a>
+      <a href="/contractor-vs-employee">Contractor vs Employee</a>
+      <a href="/401k-contribution" aria-current="page">401(k) Contribution</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>401(k) Contribution Calculator</h1>
+    <p class="lede">Your employer match is part of your pay — but only if you contribute enough to earn it. Enter your salary, your contribution rate, and your plan's match formula to see what goes in each year, how much free match money you capture (or leave behind), and what it grows to by retirement.</p>
+  </div>
+
+  <div class="card">
+    <h2>Your 401(k), this year and at retirement</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="kSalary">Annual salary</label>
+        <input id="kSalary" type="number" inputmode="decimal" min="0" step="any" value="80000">
+        <small>Gross, before tax. From the <a href="/hourly-to-salary">hourly to salary calculator</a> if you start from an hourly wage.</small>
+      </div>
+      <div class="field">
+        <label for="kContrib">Your contribution (% of salary)</label>
+        <input id="kContrib" type="number" inputmode="decimal" min="0" max="100" step="any" value="6">
+        <small>The percentage taken from each paycheck. The 2026 IRS limit caps your own contribution at $24,500 a year.</small>
+      </div>
+      <div class="field">
+        <label for="kMatch">Employer match (% of your contribution)</label>
+        <input id="kMatch" type="number" inputmode="decimal" min="0" max="100" step="any" value="50">
+        <small>50 means your employer adds 50 cents per dollar you put in. 100 means dollar-for-dollar.</small>
+      </div>
+      <div class="field">
+        <label for="kCap">Match applies up to (% of salary)</label>
+        <input id="kCap" type="number" inputmode="decimal" min="0" max="100" step="any" value="6">
+        <small>The slice of your salary the match covers — "50% up to 6%" is the most common formula in the US.</small>
+      </div>
+      <div class="field">
+        <label for="kYears">Years until retirement</label>
+        <input id="kYears" type="number" inputmode="decimal" min="0" max="50" step="any" value="30">
+        <small>How long the money compounds. 0 shows this year's numbers only, with no projection.</small>
+      </div>
+      <div class="field">
+        <label for="kReturn">Expected annual return (%)</label>
+        <input id="kReturn" type="number" inputmode="decimal" step="any" value="7">
+        <small>A planning assumption, not a promise — 7% is a common long-run stock-market estimate before inflation. The projection assumes a flat return every year.</small>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="calc401kBtn" type="button">Calculate my 401(k)</button>
+    </div>
+    <p id="kError" role="alert" style="color:#b3541e;font-weight:600;"></p>
+
+    <div class="results" id="kResults" aria-live="polite">
+      <div class="big-number">
+        <div class="eyebrow">Going into your 401(k) each year</div>
+        <div class="value" id="kBig">—</div>
+        <div class="delta" id="kBigDelta"></div>
+      </div>
+      <p id="kVerdict" style="font-weight:700;"></p>
+      <ul class="result-lines">
+        <li><span class="k">Your contribution</span><span class="v" id="kEmployee">—</span></li>
+        <li><span class="k">Employer match</span><span class="v" id="kEmployer">—</span></li>
+        <li><span class="k">Total going in each year</span><span class="v" id="kTotal">—</span></li>
+        <li><span class="k">Your contribution per month</span><span class="v" id="kMonthlyEmp">—</span></li>
+        <li><span class="k">Total per month</span><span class="v" id="kMonthlyTotal">—</span></li>
+        <li><span class="k">Total as a share of salary</span><span class="v" id="kEffRate">—</span></li>
+        <li><span class="k">Match left on the table</span><span class="v" id="kMissed">—</span></li>
+        <li><span class="k">Projected value at retirement</span><span class="v" id="kFvTotal">—</span></li>
+        <li><span class="k">Of which: your contributions grew to</span><span class="v" id="kFvEmp">—</span></li>
+        <li><span class="k">Of which: employer match grew to</span><span class="v" id="kFvEr">—</span></li>
+      </ul>
+      <p id="kCapNote" class="warn-note" style="display:none;"></p>
+      <div class="warn-note">All figures are pre-tax. Contributions reduce your taxable income now; withdrawals in retirement are taxed as income. This tool does the math — it is not financial advice.</div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>The math behind it</h2>
+    <div class="formula">your contribution = salary × contribution % (capped at the 2026 IRS limit of $24,500)</div>
+    <div class="formula">employer match = min(your contribution, salary × match cap %) × match %</div>
+    <div class="formula">match left on the table = max(0, salary × match cap % − your contribution) × match %</div>
+    <div class="formula">future value = annual total × ((1 + return)^years − 1) ÷ return</div>
+    <p>Example: $80,000 salary, contributing 6%, with a 50% match up to 6%. Your contribution is $4,800 a year ($400 a month); the employer adds $2,400, so $7,200 goes in every year — 9.00% of your salary, $600 a month. Over 30 years at 7%, that annual $7,200 grows to $680,117.66: $453,411.77 from your own contributions and $226,705.89 from the match. The match alone is a third of the final balance — money you would never see if you contributed nothing.</p>
+    <p>Contribute less and the loss is exact, not vague. At the same $100,000 salary with a 100% match up to 4%, contributing 3% puts in $3,000 and earns a $3,000 match — but contributing 4% would earn $4,000. The missing 1% costs $1,000 of free money every year, and over 30 years at 7% that $1,000-a-year gap compounds to about $94,461. The return assumption matters too: the same $7,200 a year at 5% instead of 7% reaches only $478,359.70 after 30 years — $201,758 less. The projection is deliberately conservative: it assumes each year's contribution lands at year end, so real monthly paycheck contributions would grow a little more.</p>
+    <p>One more ceiling worth knowing: a 10% contribution on a $300,000 salary would be $30,000, but the 2026 IRS limit caps your own contribution at $24,500 — the match is then calculated on the capped amount ($9,000 at 50% up to 6%), for a $33,500 total. The $24,500 limit does not include the match; the combined $72,000 ceiling from all sources is never reached by a match alone, because the match is at most your own capped contribution.</p>
+  </section>
+
+  <section class="block faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>What does "50% match up to 6%" actually mean?</summary>
+      <p>Your employer adds 50 cents for every dollar you contribute, but only on the first 6% of your salary. On an $80,000 salary, contributing 6% ($4,800) earns the full $2,400 match. Contributing 10% ($6,000) still earns only $2,400 — the match stops at 6% of salary. Contributing 3% ($2,400) earns only $1,200, leaving $1,200 of free match on the table.</p>
+    </details>
+    <details><summary>Does the employer match count toward my $24,500 limit?</summary>
+      <p>No. The 2026 IRS limit of $24,500 caps only what you put in from your own paycheck. The employer match sits on top of it. The combined ceiling from all sources is $72,000 a year, but a match alone can never push you over it — the match is at most your own (capped) contribution, so the combined total tops out at $49,000 in this calculator.</p>
+    </details>
+    <details><summary>What if my contribution rate would put in more than $24,500?</summary>
+      <p>The calculator caps your contribution at $24,500 and says so. A 10% rate on a $300,000 salary would be $30,000, so only $24,500 goes in and the match is calculated on the capped amount. If you are 50 or older, the catch-up lets you add $8,000 more ($32,500 total); at ages 60–63 the higher catch-up is $11,250 ($35,750 total). This tool uses the under-50 limit.</p>
+    </details>
+    <details><summary>Is the employer match really free money?</summary>
+      <p>Yes — a 50% match is an instant 50% return on the matched dollars, before any investment growth. The one catch is vesting: many plans only let you keep the full match after a few years with the company, so if you leave early you may forfeit part of it. Your own contributions are always 100% yours. Check your plan's vesting schedule.</p>
+    </details>
+    <details><summary>Why does the projection assume end-of-year contributions?</summary>
+      <p>It is a deliberate, conservative simplification: each year's contribution is assumed to land at year end, so it earns no return in the year it is made. Real paycheck contributions go in every pay period and earn a little more — monthly deposits over 30 years at 7% would add roughly 7–8% to the total. The projection also assumes a flat return every year; real markets vary.</p>
+    </details>
+    <details><summary>Should I contribute enough to get the full match before anything else?</summary>
+      <p>For most people, yes — the match is the highest guaranteed return available anywhere, and turning it down is leaving part of your pay on the table. This tool only does the math; it is not financial advice. High-interest debt and an emergency fund are the usual competing priorities, and your plan administrator can confirm your exact match formula.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SalaryLab — a free 401(k) contribution calculator. Figures are pre-tax estimates, not financial advice. Also try the <a href="/">salary to hourly wage calculator</a>, the <a href="/salary-raise">salary raise calculator</a>, the <a href="/take-home-pay">take-home pay calculator</a>, the <a href="/inflation-adjusted-salary">inflation-adjusted salary calculator</a>, the <a href="/real-raise">real raise calculator</a>, the <a href="/contractor-vs-employee">contractor vs employee calculator</a>, and the <a href="/freelance-rate">freelance rate calculator</a>.</p>
+  </div>
+</footer>
+<script src="../401k.js"></script>
+</body>
+</html>
